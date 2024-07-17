@@ -11,28 +11,72 @@ import requests
 from time import time, sleep
 import sqlite3
 import json
+import sys
+
+MY_INPUT = sys.argv[1]
 
 
-def create_XKCD_DB():
-    conn = sqlite3.connect('xkcd.sqlite')
-    c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS XKCD
-                 (ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                 TITLE TEXT,
-                 IMG TEXT,
-                 ALT TEXT,
-                 LINK TEXT)''')
-    conn.commit()
-    conn.close()
+def create_XKCD_DB(myData):
+	conn = sqlite3.connect('xkcd.sqlite')
+	c = conn.cursor()
+	
+	sql_drop = "DROP TABLE IF EXISTS xkcd"
+	sql_create = """CREATE TABLE xkcd (
+		ID INTEGER PRIMARY KEY AUTOINCREMENT,        
+		 
+		month INT,
+		num INT,
+		link TEXT,
+		
+		year INTEGER,
+		news TEXT,
+		safe_title TEXT,
+
+		transcript TEXT,
+		alt TEXT,
+		img TEXT,
+		
+		title TEXT,
+		day INT
+		
+		)
+		"""
+	
+	c.execute(sql_drop)
+	c.execute(sql_create)
+	
+	for myComic in myData:
+		
+		c.execute('INSERT INTO xkcd (month, num, link, year, news, safe_title, transcript, alt, img, title, day) VALUES (?,?,?,   ?,?,?,   ?,?,?, ?,?)', 
+			(myComic['month'], 
+			myComic['num'],
+			myComic['link'],
+			
+			myComic['year'],
+			myComic['news'],
+			myComic['safe_title'],
+
+			myComic['transcript'],
+			myComic['alt'],
+			myComic['img'],
+	
+			myComic['title'],
+			myComic['day']
+		))
+	
+
+	
+	conn.commit()
+	conn.close()
 
 def insert_xkcd_data():
-    conn = sqlite3.connect('xkcd.sqlite')
-    c = conn.cursor()
-    for xkcd in xkcd_list:
-        c.execute('''INSERT INTO XKCD (TITLE, IMG, ALT, LINK)
-                     VALUES (?, ?, ?, ?)''', (xkcd['title'], xkcd['img'], xkcd['alt'], xkcd['link']))
-    conn.commit()
-    conn.close()
+	conn = sqlite3.connect('xkcd.sqlite')
+	c = conn.cursor()
+	for xkcd in xkcd_list:
+		c.execute('''INSERT INTO XKCD (TITLE, IMG, ALT, LINK)
+					 VALUES (?, ?, ?, ?)''', (xkcd['title'], xkcd['img'], xkcd['alt'], xkcd['link']))
+	conn.commit()
+	conn.close()
     
 
 
@@ -72,128 +116,9 @@ def getJSONdata(start, end):
             f.write(url + '\n')
 
 def refreshReadwise_Reader_Database (rebuildDays=0):
-	# Record the start time
-	start_time = datetime.datetime.now()
 	
 	
-	full_data = []
-	next_page_cursor = None
-	updated_after=None
-	location=None
 	
-	# Later, if you want to get new documents updated after some date, do this:
-	updated_after = docs_after_date = datetime.datetime.now() - datetime.timedelta(days=10)  # use your own stored date
-	
-
-	while True:
-		params = {}
-		if next_page_cursor:
-			params['pageCursor'] = next_page_cursor
-		
-		if updated_after:
-			params['updatedAfter'] = docs_after_date.isoformat()
-			log (f"using isoformat {docs_after_date.isoformat()}")
-		if location:
-			params['location'] = location
-    
-		log ("Making Reader API request with params " + str(params) + "...")
-		
-		try:
-			response = requests.get(
-				url="https://readwise.io/api/v3/list/",
-				params=params,
-				headers={"Authorization": f"Token {TOKEN}"}, verify=False
-			)
-			response.raise_for_status()  # Raise an error for HTTP status codes >= 400
-			full_data.extend(response.json()['results'])
-			next_page_cursor = response.json().get('nextPageCursor')
-		except requests.exceptions.RequestException as e:
-			log(f"Error: {e}")
-		
-		if not next_page_cursor:
-			break
-	
-	db=sqlite3.connect(MY_READER_DATABASE)	
-	sql_drop = "DROP TABLE IF EXISTS reader" 
-	sql_create = """CREATE TABLE reader (
-						
-			reader_id TEXT,
-			readwise_url TEXT,
-			source_url TEXT,
-			
-			title TEXT,
-			author TEXT,
-			source TEXT,
-			category TEXT,
-			location TEXT,
-			
-			reader_tags TEXT,
-			siteName TEXT,
-			wordCount INT,	
-			createdDate TEXT,	
-			updatedDate TEXT,	
-
-			notes TEXT,
-			publishedDate TEXT,	
-			summary TEXT,
-			
-			image_url TEXT,
-			parent_id TEXT,
-			readingProgress REAL
-			)
-			"""
-	c = db.cursor()   
-	c.execute(sql_drop)
-	c.execute(sql_create)
-		
-			
-	for myBook in full_data:
-				
-		c.execute('INSERT INTO reader VALUES (?,?,?,   ?,?,?,?,?,  ?,?,?,?,?,  ?,?,?, ?,?,?)', 
-			(myBook['id'], 
-			myBook['url'],
-			myBook['source_url'],
-			
-			myBook['title'],
-			myBook['author'],
-			myBook['source'],
-			myBook['category'],
-			myBook['location'],
-
-
-			str(myBook['tags']),
-			myBook['site_name'],
-			myBook['word_count'],
-			myBook['created_at'],
-			myBook['updated_at'],
-
-
-			myBook['notes'],
-			myBook['published_date'],
-			myBook['summary'],
-			
-			myBook['image_url'],
-			myBook['parent_id'],
-			myBook['reading_progress'],
-			
-		
-		))
-
-		
-		# quickLookPath = f"{IMAGE_H_FOLDER}{myHigh['id']}.jpg"
-		# if not os.path.exists(quickLookPath):
-		# 	createImage(myHigh['text'],myBook['author'],myBook['title'],myHigh['id'])
-
-	
-	
-	db.commit()
-	# Record the end time
-	end_time = datetime.datetime.now()
-
-	# Calculate the time difference
-	elapsed_time = end_time - start_time
-	log (f"elapsed time: {elapsed_time}")
-	"""
 	#retrieving all the images
 	select_statement = "SELECT user_book_id, cover_image_url FROM highlights"
 	
@@ -220,16 +145,188 @@ def refreshReadwise_Reader_Database (rebuildDays=0):
 			src = 'icons/supplementals.png'
 			shutil.copy(src, ICON_PATH)
 
-	"""
 	
-	db.close()
+	
+	
+def queryItems(database, myInput):
+    db = sqlite3.connect(database)
+    db.row_factory = sqlite3.Row
+    myCounter = 0
+    types = [k for k, v in my_checks.items() if v == '1']
+    myTypes = ','.join('?'*len(types))
+
+    # getting list of tags from the database
+    tag_statement = "SELECT name FROM tags"
+    tag_rows = db.execute(tag_statement).fetchall()
+    tagList = [row[0] for row in tag_rows]
+    tagList = ['#' + s for s in tagList]
+
+    #initializing JSON output
+    result = {"items": [], "variables":{}}
+    mySearchInput = myInput.strip()
+
+    # extracting any full tags from current input, adding them to the sql query
+    fullTags = re.findall('#[^ ]+ ', myInput)
+    fullTags = [s.strip() for s in fullTags]
+    
+    tag_sql = ""
+    for currTag  in fullTags:
+        if currTag.strip() in tagList: #if it is a real tag
+            mySearchInput = re.sub(currTag, '', mySearchInput).strip()
+            currTag = currTag[1:].strip()
+            tag_sql = f"{tag_sql} AND highTags LIKE '%{currTag}%'"
+        
+
+    # check if the user is trying to enter a tag
+    MYMATCH = re.search(r'(?:^| )#[^ ]*$', myInput)
+    if (MYMATCH !=None):
+        
+        MYFLAG = MYMATCH.group(0).lstrip(' ')
+        mySearchInput = re.sub(MYFLAG,'',myInput)
+        myInput = re.sub(MYFLAG,'',myInput)
+        
+        mySubset = [i for i in tagList if MYFLAG in i]
+        
+        # adding a complete tag if the user selects it from the list
+        if mySubset:
+            for thislabel in mySubset:
+                result["items"].append({
+                "title": thislabel,
+                "subtitle": myInput,
+                "arg": myInput+thislabel+" ",
+                "icon": {
+                        "path": f"icons/label.png"
+                    }
+                })
+        else:
+            result["items"].append({
+            "title": "no labels matching",
+            "subtitle": "try another query?",
+            "arg": " ",
+            "icon": {
+                    "path": f"icons/Warning.png"
+                }
+            })
+            
+    
+    else:
+
+        
+        
+        keywords = mySearchInput.split()
+        if len(keywords) > 1:
+            conditions = []
+            conditions2 = []
+            for keyword in keywords:
+                if SEARCH_SCOPE == "Text":
+                    conditions.append(f"(highText LIKE '%{keyword}%')")
+                    conditions_str = " AND ".join(conditions)
+            
+        
+                elif SEARCH_SCOPE == "Book":
+                    conditions.append(f"(title LIKE '%{keyword}%')")
+                    conditions_str = " AND ".join(conditions)
+            
+                elif SEARCH_SCOPE == "Both":
+                    conditions.append(f"(highText LIKE '%{keyword}%')")
+                    conditions1_str = " AND ".join(conditions)
+                    conditions2.append(f"(title LIKE '%{keyword}%')")
+                    conditions2_str = " AND ".join(conditions2)
+                    conditions_str = f'({conditions1_str}) OR ({conditions2_str})' 
+            
+                    
+        else: 
+            if SEARCH_SCOPE == "Text":
+                conditions_str = f"(highText LIKE '%{mySearchInput}%')"
+                    
+    
+            elif SEARCH_SCOPE == "Book":
+                conditions_str = f"(title LIKE '%{mySearchInput}%')"
+                
+            elif SEARCH_SCOPE == "Both":
+                conditions_str = f"(highText LIKE '%{mySearchInput}%' or title LIKE '%{mySearchInput}%')"
+    
+    
+        sql = f"SELECT * FROM highlights WHERE {conditions_str} and category IN ({myTypes}) {tag_sql}"
+        log (sql)
+        
+        rs = db.execute(sql, types).fetchall()
+        totCount = len(rs)
+
+
+        for r in rs:
+            myCounter += 1
+            myURL = r['high_readwise_url']
+            myURLall = r['readwise_url']
+            myTags = ''
+            if r['highTags'] != "[]":
+                myTags = json.loads (r['highTags'].replace("'", '"'))
+                myTags = ",".join ([x['name'] for x in myTags])
+                myTags = f"🏷️ {myTags}"
+                if r['high_is_favorite'] == 1:
+                    myTags = myTags+'❤️'
+        
+            if r['highURL']:
+                sourceURLstring = f"open source URL"
+            else:
+                sourceURLstring = "no source URL"
+            myQuickLook = f"{IMAGE_H_FOLDER}{r['highID']}.jpg"
+            result["items"].append({
+                "title": r['highText'],
+                
+                'subtitle': f"{myCounter}/{totCount} {r['title']}-{r['author']} {myTags}",
+                'valid': True,
+                "quicklookurl": myQuickLook,
+                'variables': {
+                    "fullOutput": f"{r['highText']}\n\n{r['author']}: {r['title']}",
+                    "myURL": myURL,
+                    "myStatus": 'completed',
+                    "myURLall": myURLall
+                },
+                 "mods": {
+    
+    
+                    "command": {
+                        "valid": 'true',
+                        "subtitle": f"{sourceURLstring}",
+                        "arg": r['highURL']
+                    }},
+                "icon": {
+                    "path": f"{IMAGE_FOLDER}{r['user_book_id']}.jpg"
+                },
+                'arg': ''
+                    }) 
+            
+        if MYINPUT and not rs:
+            result["items"].append({
+                "title": "No matches in your library",
+                "subtitle": "Try a different query",
+                "arg": "",
+                "icon": {
+                    "path": "icons/Warning.png"
+                    }
+                
+                    })
+        
+    print (json.dumps(result))
+
+# readJSONdata
+def readJSONdata():
+	with open('xkcd.json', 'r') as f:
+		xkcd_list = json.load(f)
+	return xkcd_list
+
+      
 
 
 def main():
-      main_start_time = time()
-      getJSONdata (2958,0)
-      main_timeElapsed = time() - main_start_time
-      print (f"\nscript duration: {round (main_timeElapsed,3)} seconds")
+	main_start_time = time()
+	# getJSONdata (2958,0)
+	myData = readJSONdata()
+	
+	create_XKCD_DB(myData)
+	main_timeElapsed = time() - main_start_time
+	print (f"\nscript duration: {round (main_timeElapsed,3)} seconds")
 
 
 
