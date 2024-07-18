@@ -6,6 +6,19 @@
 	<string>giovanni.xkcd</string>
 	<key>connections</key>
 	<dict>
+		<key>11C547C1-700D-4254-BEF4-5BB71FE439EE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7F481695-27F3-4806-96D8-EC4F51C7301D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</key>
 		<array>
 			<dict>
@@ -22,11 +35,21 @@
 				<key>destinationuid</key>
 				<string>12248B5D-397E-4E29-B2D1-E7EEB464D2B9</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>Open on xkcd.com</string>
 				<key>vitoclose</key>
 				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⭐️ add to favorites</string>
+				<key>vitoclose</key>
+				<true/>
 			</dict>
 		</array>
 		<key>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</key>
@@ -41,12 +64,61 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Add to favorites</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4B99EBC0-8AD8-44AD-980A-326D381AFF01</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7F481695-27F3-4806-96D8-EC4F51C7301D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F272038B-A235-468A-8254-401F4382CF2E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>DCC195CA-159E-4904-9721-E1A0D4FF1DB9</string>
+				<string>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F272038B-A235-468A-8254-401F4382CF2E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4B99EBC0-8AD8-44AD-980A-326D381AFF01</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,6 +150,98 @@
 				<key>imageaspect</key>
 				<integer>0</integer>
 				<key>inputfile</key>
+				<string></string>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>showsubtitles</key>
+				<true/>
+				<key>showtitles</key>
+				<true/>
+				<key>subtitlesinfooter</key>
+				<false/>
+				<key>titlesinfooter</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.grid</string>
+			<key>uid</key>
+			<string>F272038B-A235-468A-8254-401F4382CF2E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>xxk</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Recent xkcd comics</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>11C547C1-700D-4254-BEF4-5BB71FE439EE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>sort_order</key>
+					<string>by_added</string>
+					<key>target_path</key>
+					<string>/Users/giovanni.coppola/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/giovanni.xkcd/images</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/directory.children.sort</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>7F481695-27F3-4806-96D8-EC4F51C7301D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{query}</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>4B99EBC0-8AD8-44AD-980A-326D381AFF01</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>columncount</key>
+				<integer>4</integer>
+				<key>filterable</key>
+				<true/>
+				<key>fixedorder</key>
+				<false/>
+				<key>imageaspect</key>
+				<integer>0</integer>
+				<key>inputfile</key>
 				<string>createTextView.py</string>
 				<key>inputtype</key>
 				<integer>1</integer>
@@ -96,27 +260,6 @@
 			<string>alfred.workflow.userinterface.grid</string>
 			<key>uid</key>
 			<string>DCC195CA-159E-4904-9721-E1A0D4FF1DB9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>cazzo</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string></string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -197,7 +340,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>refreshing the database...</string>
 				<key>script</key>
 				<string>export PYTHONPATH="$PWD/lib"
 /usr/bin/python3 xkcd-query.py "$1"
@@ -243,17 +386,78 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>columncount</key>
+				<integer>4</integer>
+				<key>filterable</key>
+				<true/>
+				<key>fixedorder</key>
+				<false/>
+				<key>imageaspect</key>
+				<integer>0</integer>
+				<key>inputfile</key>
+				<string>createGridView.py</string>
+				<key>inputtype</key>
+				<integer>1</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>showsubtitles</key>
+				<true/>
+				<key>showtitles</key>
+				<true/>
+				<key>subtitlesinfooter</key>
+				<false/>
+				<key>titlesinfooter</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.grid</string>
+			<key>uid</key>
+			<string>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>cazzo</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string></string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>11C547C1-700D-4254-BEF4-5BB71FE439EE</key>
+		<dict>
+			<key>xpos</key>
+			<real>150</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
 		<key>12248B5D-397E-4E29-B2D1-E7EEB464D2B9</key>
 		<dict>
 			<key>xpos</key>
-			<real>325</real>
+			<real>385</real>
 			<key>ypos</key>
-			<real>690</real>
+			<real>710</real>
 		</dict>
 		<key>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</key>
 		<dict>
@@ -269,12 +473,33 @@
 			<key>ypos</key>
 			<real>585</real>
 		</dict>
+		<key>4B99EBC0-8AD8-44AD-980A-326D381AFF01</key>
+		<dict>
+			<key>xpos</key>
+			<real>835</real>
+			<key>ypos</key>
+			<real>265</real>
+		</dict>
+		<key>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</key>
+		<dict>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>755</real>
+		</dict>
 		<key>7E5A3347-773C-4402-95C4-37BB636D73AB</key>
 		<dict>
 			<key>xpos</key>
 			<real>775</real>
 			<key>ypos</key>
 			<real>605</real>
+		</dict>
+		<key>7F481695-27F3-4806-96D8-EC4F51C7301D</key>
+		<dict>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>170</real>
 		</dict>
 		<key>DCC195CA-159E-4904-9721-E1A0D4FF1DB9</key>
 		<dict>
@@ -286,9 +511,16 @@
 		<key>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</key>
 		<dict>
 			<key>xpos</key>
-			<real>395</real>
+			<real>90</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>835</real>
+		</dict>
+		<key>F272038B-A235-468A-8254-401F4382CF2E</key>
+		<dict>
+			<key>xpos</key>
+			<real>545</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

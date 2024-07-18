@@ -19,6 +19,7 @@ comicN=os.path.expanduser(os.getenv('comicN', ''))
 comicAlt=os.path.expanduser(os.getenv('comicAlt', ''))
 comicDate=os.path.expanduser(os.getenv('comicDate', ''))
 
+
 ICON_PATH = f"{CACHE_FOLDER_IMAGES}{comicN}.png"
 if not os.path.exists(ICON_PATH):
   log ("retrieving image" + ICON_PATH)
@@ -32,7 +33,7 @@ if not os.path.exists(ICON_PATH):
 myJSON = {
   "variables": {
     "fruitxx": ICON_PATH,
-    "vegetable": "carrot"
+    "comicNum": comicN
   },
   #"rerun": 0.5,
   "response": f"# {myTitle} \n![]({ICON_PATH}) \n{comicAlt}",

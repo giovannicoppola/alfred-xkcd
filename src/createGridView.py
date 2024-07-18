@@ -3,63 +3,75 @@
 
 import json
 import os
+import sqlite3
+import urllib.request
+from config import MY_DATABASE, FAVS, CACHE_FOLDER_IMAGES, log
 
+myNum = os.path.expanduser(os.getenv('comicNum', ''))
+myURL=os.path.expanduser(os.getenv('imageURL', ''))
 
+log (f"mynum = {myNum}")
+def fetchComic(num):
+    
+    # read the favs file
+    with open(FAVS) as f:
+        favsJSON = json.load(f)
+        
+    
+    db = sqlite3.connect(MY_DATABASE)
+    db.row_factory = sqlite3.Row
+    cursor = db.cursor()
+    
+    
+    
+    query = f"SELECT * FROM xkcd WHERE num = {num}"
+    cursor.execute(query)
+    rs = cursor.fetchall()
+    
 
-myJSON = {
-    "cache": {
-        "seconds": 21600,
-        "loosereload": True
-    },
-    "items": [
-        {
-            "title": "Eyes and Horns",
-            "subtitle": "Experimental \ud800\udd01 6 minutes \ud800\udd01 Chaerin Im",
-            "icon": {
-                "path": "~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.vitorgalvao.alfred.shortfilms/images/Eyes-and-horns-Chaerin-Im-01.jpg"
-            },
-            "mods": {
-                "alt": {
-                    "subtitle": "Inspired by Picasso\u2019s \u2018Vollard Suite\u2019, the transformation of the over masculine Minotaur leads to the destruction of boundaries of sexes."
+    for r in rs:
+        COMICS_PATH = f"{CACHE_FOLDER_IMAGES}{r['num']}.png"
+        if not os.path.exists(COMICS_PATH):
+            log ("retrieving image" + COMICS_PATH)
+            try:
+                urllib.request.urlretrieve(myURL, COMICS_PATH)
+            except urllib.error.URLError as e:
+                log("Error retrieving image:", e.reason)  # Log the specific error reason
+
+    
+
+        myJSON = {
+                    "title": r['title'],
+                    "subtitle": r['alt'],
+                    "icon": {
+                        "path": COMICS_PATH
+                    },
+                    "mods": {
+                        "alt": {
+                            "subtitle": "test"
+                        }
+                    },
+                    "quicklookurl": r['img'],
+                    "match": f"{r['title']} {r['alt']}",
+                    "arg": COMICS_PATH
                 }
-            },
-            "quicklookurl": "https://www.shortoftheweek.com/2024/07/17/eyes-and-horns/",
-            "match": "Eyes and Horns Experimental",
-            "arg": "https://player.vimeo.com/video/985689913"
-        },
-        {
-            "title": "Nanitic",
-            "subtitle": "Drama \ud800\udd01 14 minutes \ud800\udd01 Carol Nguyen",
-            "icon": {
-                "path": "~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.vitorgalvao.alfred.shortfilms/images/Nanitic-Carol-Nguyen-03.jpg"
-            },
-            "mods": {
-                "alt": {
-                    "subtitle": "9 year-old Trang starts to shift out of oblivion as her aunt Ut tends to Grandma, who lies in her deathbed in the living room. How can a single body occupy so much space? What will happen when Grandma is gone?"
-                }
-            },
-            "quicklookurl": "https://www.shortoftheweek.com/2024/07/16/nanitic/",
-            "match": "Nanitic Drama",
-            "arg": "https://player.vimeo.com/video/981226911"
-        }
-    ]
-}
+    
+    favsJSON['items'].append(myJSON)
+
+    with open(FAVS, 'w') as f:
+        json.dump(favsJSON, f, indent=4)
+
+    print (json.dumps(favsJSON)) 
+
+if myNum:
+    fetchComic(myNum)
+else:
+    # read the favs file
+    with open(FAVS) as f:
+        favsJSON = json.load(f)
+    
+    print (json.dumps(favsJSON))
 
 
-# myJSON = {
-#   "variables": {
-#     "fruitxx": "banana",
-#     "vegetable": "carrot"
-#   },
-#   #"rerun": 0.5,
-#   "response": f"{MYSTRING['myText']}\n Fruits are the seed-bearing structures in flowering plants.",
-#   "footer": f"{MYSTRING['myValue']}, Anatomy of fruits and vegetables",
-#   "behaviour": {
-#     "response": "append",
-#     "scroll": "end",
-#     "inputfield": "select"
-#   }
-# }
 
 
-print (json.dumps(myJSON)) 
