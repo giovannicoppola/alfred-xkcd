@@ -174,6 +174,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>sort_order</key>
+					<string>by_added</string>
+					<key>target_path</key>
+					<string>/Users/giovanni.coppola/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/giovanni.xkcd/images</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/directory.children.sort</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>7F481695-27F3-4806-96D8-EC4F51C7301D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -189,26 +209,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>11C547C1-700D-4254-BEF4-5BB71FE439EE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>sort_order</key>
-					<string>by_added</string>
-					<key>target_path</key>
-					<string>/Users/giovanni.coppola/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/giovanni.xkcd/images</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/directory.children.sort</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>7F481695-27F3-4806-96D8-EC4F51C7301D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -233,35 +233,53 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>columncount</key>
-				<integer>4</integer>
-				<key>filterable</key>
-				<true/>
-				<key>fixedorder</key>
+				<key>alfredfiltersresults</key>
 				<false/>
-				<key>imageaspect</key>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>inputfile</key>
-				<string>createTextView.py</string>
-				<key>inputtype</key>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
 				<integer>1</integer>
-				<key>loadingtext</key>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:MAIN_KEYWORD}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>refreshing the database...</string>
+				<key>script</key>
+				<string>export PYTHONPATH="$PWD/lib"
+/usr/bin/python3 xkcd-query.py "$1"
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>showsubtitles</key>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>xkcd</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
 				<true/>
-				<key>showtitles</key>
-				<true/>
-				<key>subtitlesinfooter</key>
-				<false/>
-				<key>titlesinfooter</key>
-				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.userinterface.grid</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>DCC195CA-159E-4904-9721-E1A0D4FF1DB9</string>
+			<string>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -317,53 +335,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
+				<key>columncount</key>
+				<integer>4</integer>
+				<key>filterable</key>
+				<true/>
+				<key>fixedorder</key>
 				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
+				<key>imageaspect</key>
 				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
+				<key>inputfile</key>
+				<string>createTextView.py</string>
+				<key>inputtype</key>
 				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>xkcd</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>refreshing the database...</string>
-				<key>script</key>
-				<string>export PYTHONPATH="$PWD/lib"
-/usr/bin/python3 xkcd-query.py "$1"
-</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
+				<key>loadingtext</key>
 				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>xkcd</string>
-				<key>type</key>
-				<integer>11</integer>
-				<key>withspace</key>
+				<key>showsubtitles</key>
 				<true/>
+				<key>showtitles</key>
+				<true/>
+				<key>subtitlesinfooter</key>
+				<false/>
+				<key>titlesinfooter</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.userinterface.grid</string>
 			<key>uid</key>
-			<string>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</string>
+			<string>DCC195CA-159E-4904-9721-E1A0D4FF1DB9</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -462,9 +462,9 @@
 		<key>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</key>
 		<dict>
 			<key>xpos</key>
-			<real>150</real>
+			<real>155</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>410</real>
 		</dict>
 		<key>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</key>
 		<dict>
@@ -497,16 +497,16 @@
 		<key>7F481695-27F3-4806-96D8-EC4F51C7301D</key>
 		<dict>
 			<key>xpos</key>
-			<real>360</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>150</real>
 		</dict>
 		<key>DCC195CA-159E-4904-9721-E1A0D4FF1DB9</key>
 		<dict>
 			<key>xpos</key>
-			<real>685</real>
+			<real>1810</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>610</real>
 		</dict>
 		<key>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</key>
 		<dict>
@@ -518,13 +518,37 @@
 		<key>F272038B-A235-468A-8254-401F4382CF2E</key>
 		<dict>
 			<key>xpos</key>
-			<real>545</real>
+			<real>720</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>xkcd</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Main Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>MAIN_KEYWORD</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
