@@ -17,11 +17,11 @@ src="https://img.shields.io/github/downloads/giovannicoppola/alfred-xkcd/total?c
 
 ## While in list, random, or favorite view:
 - <kbd>↩️</kbd> show in text view (comic will be marked as read)
--  `⇧↩️`: copy comic image to clipboard
--  `⇧` (QuickLook): QuickLook image (`⇧` or `space` to quit). Using the arrow keys you can quickly review multiple comics (will not be marked as read)
--  `^↩️`: toggle favorite status
--  `⌘↩️`: open on `xkcd.com`
--  `⌥↩️`: open on `explainxkcd.com` (which has also larger images)
+-  <kbd>⇧</kbd><kbd>↩️</kbd>: copy comic image to clipboard
+- <kbd>⇧</kbd> (QuickLook): QuickLook image (`⇧` or `space` to quit). Using the arrow keys you can quickly review multiple comics (will not be marked as read)
+- <kbd>^</kbd><kbd>↩️</kbd>: toggle favorite status
+- <kbd>⌘</kbd><kbd>↩️</kbd>: open on `xkcd.com`
+-  <kbd>⌥</kbd><kbd>↩️</kbd>: open on `explainxkcd.com` (which has also larger images)
 
 # Updating
 - `alfred-xkcd` will download the titles of new comics based on the number of days specified in the `Workflow Configuration` (Refresh Rate variable)
