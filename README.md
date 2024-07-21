@@ -6,7 +6,7 @@ If you are an xkcd fan and have ever tried to remember or find a particular comi
 
 # Usage
 - Search (default keyword: `xkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics. 
-- Favorite (default keyword: `xk::favorite`) or hotkey: favorite xkcd comics in grid view. 
+- Favorite (default keyword: `xk::favs`) or hotkey: favorite xkcd comics in grid view. 
 - Random (default keyword: `xk::random`) or hotkey: one random unread xkcd comic. 
 - Recent (default keyword: `xk::recent`) or hotkey: recently viewed xkcd comics in grid view. 
  
