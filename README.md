@@ -1,7 +1,7 @@
 # alfred-xkcd
 A browser for xkcd comics
 ![](src/xkcd.png)
-If you are an xkcd fan and have ever tried to remember or find a particular comic, you might find this Workfklow helpful. 
+If you are an xkcd fan and have ever tried to remember or find a particular comic, you might find this Workflow helpful. 
 
 <a href="https://github.com/giovannicoppola/alfred-xkcd/releases/latest/">
 <img alt="Downloads"
