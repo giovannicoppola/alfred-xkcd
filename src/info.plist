@@ -19,6 +19,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>181CD7A5-E4A4-4291-83B4-32954AB05827</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6AB88246-6CF2-4960-895B-C7F1D973BEC2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2A43A677-7ED0-4081-B995-14F8B8CBA6E5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>11C547C1-700D-4254-BEF4-5BB71FE439EE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</key>
 		<array>
 			<dict>
@@ -33,23 +59,43 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>12248B5D-397E-4E29-B2D1-E7EEB464D2B9</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>Open on xkcd.com</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</string>
+				<string>34A6D4A9-8984-4D8C-99B7-168C8205F0C2</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⭐️ add to favorites</string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>84435B23-5E9E-4C50-8A2C-9C3BA36658AD</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F44004EE-DF64-443D-BF0D-E863F5F0C42B</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>181CD7A5-E4A4-4291-83B4-32954AB05827</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</key>
@@ -64,22 +110,147 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</string>
-				<key>modifiers</key>
-				<integer>262144</integer>
-				<key>modifiersubtext</key>
-				<string>Add to favorites</string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
 		</array>
-		<key>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</key>
+		<key>34A6D4A9-8984-4D8C-99B7-168C8205F0C2</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4B99EBC0-8AD8-44AD-980A-326D381AFF01</string>
+				<string>601CFF4B-2B59-477F-8EDD-074F00AB2309</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EC7EC524-86E8-4D72-96B0-C83B18FD647A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4A63CD6B-F071-4EF0-87E3-8A7DEC24E076</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>78D6C1BB-F7B6-46BF-BC77-91DBE582B493</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6AC3685-0734-4F76-83E4-5B75DEF5C993</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>84435B23-5E9E-4C50-8A2C-9C3BA36658AD</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F44004EE-DF64-443D-BF0D-E863F5F0C42B</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>57C4BFD5-250D-4F39-8941-CA932120C23E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>84435B23-5E9E-4C50-8A2C-9C3BA36658AD</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F44004EE-DF64-443D-BF0D-E863F5F0C42B</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6AB88246-6CF2-4960-895B-C7F1D973BEC2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>360A2390-F6D4-4B22-B12D-F6895050AEFD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>78D6C1BB-F7B6-46BF-BC77-91DBE582B493</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E9F7FA98-2DC1-483A-A82A-5515EBCB38C8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7E5A3347-773C-4402-95C4-37BB636D73AB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>42B77FF6-6265-4118-B866-1029D095FA97</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -101,11 +272,76 @@
 				<false/>
 			</dict>
 		</array>
+		<key>871B3C76-A177-427C-A49B-080E5356F49C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9EF88AC2-1A66-4C9E-AC0C-30460AC0B102</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B42692BF-C43A-4EA6-B9DD-471079F3FD8E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57C4BFD5-250D-4F39-8941-CA932120C23E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D13F7E7D-71FB-4C75-945C-5B44B30C984A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>89AEF6D6-39A7-4851-830D-821356E2E2C7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</string>
+				<string>4A63CD6B-F071-4EF0-87E3-8A7DEC24E076</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EB637A17-FBC7-4396-BA2A-E4A20E798670</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D13F7E7D-71FB-4C75-945C-5B44B30C984A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -118,7 +354,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4B99EBC0-8AD8-44AD-980A-326D381AFF01</string>
+				<string>EB637A17-FBC7-4396-BA2A-E4A20E798670</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -141,12 +377,76 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>2A43A677-7ED0-4081-B995-14F8B8CBA6E5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>behaviour</key>
+				<integer>2</integer>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
+				<string></string>
+				<key>inputfile</key>
+				<string>createTextView_exRecents.py</string>
+				<key>inputtype</key>
+				<integer>1</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>EB637A17-FBC7-4396-BA2A-E4A20E798670</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>columncount</key>
 				<integer>4</integer>
 				<key>filterable</key>
 				<true/>
 				<key>fixedorder</key>
-				<false/>
+				<true/>
 				<key>imageaspect</key>
 				<integer>0</integer>
 				<key>inputfile</key>
@@ -156,7 +456,7 @@
 				<key>loadingtext</key>
 				<string></string>
 				<key>showsubtitles</key>
-				<true/>
+				<false/>
 				<key>showtitles</key>
 				<true/>
 				<key>subtitlesinfooter</key>
@@ -174,34 +474,16 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>sort_order</key>
-					<string>by_added</string>
-					<key>target_path</key>
-					<string>/Users/giovanni.coppola/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/giovanni.xkcd/images</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/directory.children.sort</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>7F481695-27F3-4806-96D8-EC4F51C7301D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>xxk</string>
+				<string>{var:RECENT_KEYWORD}</string>
+				<key>skipuniversalaction</key>
+				<true/>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Recent xkcd comics</string>
+				<string>recent xkcd comics</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -217,8 +499,49 @@
 			<dict>
 				<key>tasksettings</key>
 				<dict>
+					<key>sort_order</key>
+					<string>by_added</string>
 					<key>target_path</key>
-					<string>{query}</string>
+					<string>~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/giovanni.xkcd/images/recents</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/directory.children.sort</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>7F481695-27F3-4806-96D8-EC4F51C7301D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Image copied to clipboard 🖼️</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>89AEF6D6-39A7-4851-830D-821356E2E2C7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{var:comicPath}</string>
 				</dict>
 				<key>taskuid</key>
 				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
@@ -226,7 +549,179 @@
 			<key>type</key>
 			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>4B99EBC0-8AD8-44AD-980A-326D381AFF01</string>
+			<string>D13F7E7D-71FB-4C75-945C-5B44B30C984A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query=$1
+
+/usr/bin/python3 toggleFav.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>78D6C1BB-F7B6-46BF-BC77-91DBE582B493</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>{var:FAVS_KEYWORD}</string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>xkcd favorites</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>columncount</key>
+				<integer>4</integer>
+				<key>filterable</key>
+				<true/>
+				<key>fixedorder</key>
+				<false/>
+				<key>imageaspect</key>
+				<integer>0</integer>
+				<key>inputfile</key>
+				<string>favsGrid.py</string>
+				<key>inputtype</key>
+				<integer>1</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>showsubtitles</key>
+				<true/>
+				<key>showtitles</key>
+				<true/>
+				<key>subtitlesinfooter</key>
+				<false/>
+				<key>titlesinfooter</key>
+				<false/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>favGrid</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.grid</string>
+			<key>uid</key>
+			<string>4A63CD6B-F071-4EF0-87E3-8A7DEC24E076</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>871B3C76-A177-427C-A49B-080E5356F49C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>favGrid</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>E9F7FA98-2DC1-483A-A82A-5515EBCB38C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{var:fruitxx}</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>A6AC3685-0734-4F76-83E4-5B75DEF5C993</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{var:comicPath}</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>7E5A3347-773C-4402-95C4-37BB636D73AB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -265,13 +760,24 @@
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
 				<key>subtext</key>
-				<string></string>
+				<string>search and browse xkcd comics</string>
 				<key>title</key>
 				<string>xkcd</string>
 				<key>type</key>
 				<integer>11</integer>
 				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>custominputarg</key>
+				<string>{var:currQuery}</string>
+				<key>externalid</key>
+				<string>mainSearch</string>
+				<key>usecustominputarg</key>
 				<true/>
 			</dict>
 			<key>type</key>
@@ -280,6 +786,37 @@
 			<string>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>9EF88AC2-1A66-4C9E-AC0C-30460AC0B102</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -317,51 +854,191 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>target_path</key>
-					<string>{var:fruitxx}</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Image copied to clipboard 🖼️</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>7E5A3347-773C-4402-95C4-37BB636D73AB</string>
+			<string>42B77FF6-6265-4118-B866-1029D095FA97</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>columncount</key>
-				<integer>4</integer>
-				<key>filterable</key>
-				<true/>
-				<key>fixedorder</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>imageaspect</key>
-				<integer>0</integer>
-				<key>inputfile</key>
-				<string>createTextView.py</string>
-				<key>inputtype</key>
-				<integer>1</integer>
-				<key>loadingtext</key>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>showsubtitles</key>
-				<true/>
-				<key>showtitles</key>
-				<true/>
-				<key>subtitlesinfooter</key>
+				<key>title</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>601CFF4B-2B59-477F-8EDD-074F00AB2309</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
 				<false/>
-				<key>titlesinfooter</key>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query=$1
+
+/usr/bin/python3 toggleFav.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>34A6D4A9-8984-4D8C-99B7-168C8205F0C2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:RANDOM_KEYWORD}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>refreshing the database...</string>
+				<key>script</key>
+				<string>export PYTHONPATH="$PWD/lib"
+/usr/bin/python3 xkcd-random.py "$1"
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>random unread xkcd comic</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.userinterface.grid</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>DCC195CA-159E-4904-9721-E1A0D4FF1DB9</string>
+			<string>57C4BFD5-250D-4F39-8941-CA932120C23E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>84435B23-5E9E-4C50-8A2C-9C3BA36658AD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>9</integer>
+				<key>hotmod</key>
+				<integer>1572864</integer>
+				<key>hotstring</key>
+				<string>V</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>B42692BF-C43A-4EA6-B9DD-471079F3FD8E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>mainSearch</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>EC7EC524-86E8-4D72-96B0-C83B18FD647A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -382,145 +1059,388 @@
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>12248B5D-397E-4E29-B2D1-E7EEB464D2B9</string>
+			<string>F44004EE-DF64-443D-BF0D-E863F5F0C42B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>columncount</key>
-				<integer>4</integer>
-				<key>filterable</key>
-				<true/>
-				<key>fixedorder</key>
+				<key>alfredfiltersresults</key>
 				<false/>
-				<key>imageaspect</key>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>inputfile</key>
-				<string>createGridView.py</string>
-				<key>inputtype</key>
-				<integer>1</integer>
-				<key>loadingtext</key>
-				<string></string>
-				<key>showsubtitles</key>
+				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
-				<key>showtitles</key>
-				<true/>
-				<key>subtitlesinfooter</key>
-				<false/>
-				<key>titlesinfooter</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.userinterface.grid</string>
-			<key>uid</key>
-			<string>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
 				<key>keyword</key>
-				<string>cazzo</string>
+				<string>{var:REFRESH_KEYWORD}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>⏳...please wait while I refresh...</string>
+				<key>script</key>
+				<string>export PYTHONPATH="$PWD/lib"
+/usr/bin/python3 forceUpdate.py
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>subtext</key>
 				<string></string>
-				<key>text</key>
-				<string></string>
+				<key>title</key>
+				<string>refresh xkcd database 👀</string>
+				<key>type</key>
+				<integer>5</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</string>
+			<string>940E827E-E6B2-41A3-8325-B423817E6AAF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query=$1
+
+/usr/bin/python3 fetchImage.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>181CD7A5-E4A4-4291-83B4-32954AB05827</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>6AB88246-6CF2-4960-895B-C7F1D973BEC2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Image copied to clipboard 🖼️</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>360A2390-F6D4-4B22-B12D-F6895050AEFD</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># alfred-xkcd
+A browser for xkcd comics
+![](xkcd.png)
+If you are an xkcd fan and have ever tried to remember or find a particular comic, you might find this Workfklow helpful. 
+
+
+# Usage
+- Search (default keyword: `xkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics. 
+- Favorite (default keyword: `xk::favs`) or hotkey: favorite xkcd comics in grid view. 
+- Random (default keyword: `xk::random`) or hotkey: one random unread xkcd comic. 
+- Recent (default keyword: `xk::recent`) or hotkey: recently viewed xkcd comics in grid view. 
+ 
+
+## While in list, random, or favorite view:
+- `↩️` show in text view (comic will be marked as read)
+-  `⇧↩️`: copy comic image to clipboard
+-  `⇧` (QuickLook): QuickLook image (`⇧` or `space` to quit). Using the arrow keys you can quickly review multiple comics (will not be marked as read)
+-  `^↩️`: toggle favorite status
+-  `⌘↩️`: open on `xkcd.com`
+-  `⌥↩️`: open on `explainxkcd.com` (which has also larger images)
+
+# Updating
+- `alfred-xkcd` will download the titles of new comics based on the number of days specified in the `Workflow Configuration` (Refresh Rate variable)
+- refresh can be forced with `xk::refresh`
+
+ 
+
+# Feedback
+... is welcome!
+https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 	<key>uidata</key>
 	<dict>
 		<key>11C547C1-700D-4254-BEF4-5BB71FE439EE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>150</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>50</real>
 		</dict>
-		<key>12248B5D-397E-4E29-B2D1-E7EEB464D2B9</key>
+		<key>181CD7A5-E4A4-4291-83B4-32954AB05827</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>fetch image</string>
+			<key>xpos</key>
+			<real>620</real>
+			<key>ypos</key>
+			<real>920</real>
+		</dict>
+		<key>2A43A677-7ED0-4081-B995-14F8B8CBA6E5</key>
 		<dict>
 			<key>xpos</key>
-			<real>385</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>50</real>
 		</dict>
 		<key>2F0BBAF7-18D2-45FB-9457-3DDC98458B40</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>155</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>385</real>
 		</dict>
 		<key>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</key>
 		<dict>
 			<key>xpos</key>
-			<real>455</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>385</real>
 		</dict>
-		<key>4B99EBC0-8AD8-44AD-980A-326D381AFF01</key>
+		<key>34A6D4A9-8984-4D8C-99B7-168C8205F0C2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>Toggle favorite</string>
+			<key>xpos</key>
+			<real>620</real>
+			<key>ypos</key>
+			<real>570</real>
+		</dict>
+		<key>360A2390-F6D4-4B22-B12D-F6895050AEFD</key>
 		<dict>
 			<key>xpos</key>
-			<real>835</real>
+			<real>1135</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>925</real>
 		</dict>
-		<key>5B636492-32F1-4863-BF45-2B0FCF3CFFCD</key>
+		<key>42B77FF6-6265-4118-B866-1029D095FA97</key>
 		<dict>
 			<key>xpos</key>
-			<real>625</real>
+			<real>1125</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>400</real>
+		</dict>
+		<key>4A63CD6B-F071-4EF0-87E3-8A7DEC24E076</key>
+		<dict>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>205</real>
+		</dict>
+		<key>57C4BFD5-250D-4F39-8941-CA932120C23E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>320</real>
+			<key>ypos</key>
+			<real>575</real>
+		</dict>
+		<key>601CFF4B-2B59-477F-8EDD-074F00AB2309</key>
+		<dict>
+			<key>xpos</key>
+			<real>895</real>
+			<key>ypos</key>
+			<real>530</real>
+		</dict>
+		<key>6AB88246-6CF2-4960-895B-C7F1D973BEC2</key>
+		<dict>
+			<key>xpos</key>
+			<real>895</real>
+			<key>ypos</key>
+			<real>925</real>
+		</dict>
+		<key>78D6C1BB-F7B6-46BF-BC77-91DBE582B493</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>toggle favorite</string>
+			<key>xpos</key>
+			<real>900</real>
+			<key>ypos</key>
+			<real>205</real>
 		</dict>
 		<key>7E5A3347-773C-4402-95C4-37BB636D73AB</key>
 		<dict>
 			<key>xpos</key>
-			<real>775</real>
+			<real>890</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>385</real>
 		</dict>
 		<key>7F481695-27F3-4806-96D8-EC4F51C7301D</key>
 		<dict>
 			<key>xpos</key>
-			<real>465</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>50</real>
 		</dict>
-		<key>DCC195CA-159E-4904-9721-E1A0D4FF1DB9</key>
+		<key>84435B23-5E9E-4C50-8A2C-9C3BA36658AD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>open on xkcd.com</string>
+			<key>xpos</key>
+			<real>1310</real>
+			<key>ypos</key>
+			<real>580</real>
+		</dict>
+		<key>871B3C76-A177-427C-A49B-080E5356F49C</key>
 		<dict>
 			<key>xpos</key>
-			<real>1810</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>205</real>
+		</dict>
+		<key>89AEF6D6-39A7-4851-830D-821356E2E2C7</key>
+		<dict>
+			<key>xpos</key>
+			<real>1735</real>
+			<key>ypos</key>
+			<real>55</real>
+		</dict>
+		<key>940E827E-E6B2-41A3-8325-B423817E6AAF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>320</real>
+			<key>ypos</key>
+			<real>780</real>
+		</dict>
+		<key>9EF88AC2-1A66-4C9E-AC0C-30460AC0B102</key>
+		<dict>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>385</real>
+		</dict>
+		<key>A6AC3685-0734-4F76-83E4-5B75DEF5C993</key>
+		<dict>
+			<key>xpos</key>
+			<real>1310</real>
+			<key>ypos</key>
+			<real>320</real>
+		</dict>
+		<key>B42692BF-C43A-4EA6-B9DD-471079F3FD8E</key>
+		<dict>
+			<key>xpos</key>
+			<real>75</real>
+			<key>ypos</key>
+			<real>580</real>
+		</dict>
+		<key>D13F7E7D-71FB-4C75-945C-5B44B30C984A</key>
+		<dict>
+			<key>xpos</key>
+			<real>1480</real>
+			<key>ypos</key>
+			<real>55</real>
 		</dict>
 		<key>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>90</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>205</real>
+		</dict>
+		<key>E9F7FA98-2DC1-483A-A82A-5515EBCB38C8</key>
+		<dict>
+			<key>xpos</key>
+			<real>1125</real>
+			<key>ypos</key>
+			<real>205</real>
+		</dict>
+		<key>EB637A17-FBC7-4396-BA2A-E4A20E798670</key>
+		<dict>
+			<key>xpos</key>
+			<real>1215</real>
+			<key>ypos</key>
+			<real>50</real>
+		</dict>
+		<key>EC7EC524-86E8-4D72-96B0-C83B18FD647A</key>
+		<dict>
+			<key>xpos</key>
+			<real>895</real>
+			<key>ypos</key>
+			<real>665</real>
 		</dict>
 		<key>F272038B-A235-468A-8254-401F4382CF2E</key>
 		<dict>
 			<key>xpos</key>
-			<real>720</real>
+			<real>890</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>50</real>
+		</dict>
+		<key>F44004EE-DF64-443D-BF0D-E863F5F0C42B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>open on explainxkcd.com</string>
+			<key>xpos</key>
+			<real>1310</real>
+			<key>ypos</key>
+			<real>715</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -546,9 +1466,114 @@
 			<key>variable</key>
 			<string>MAIN_KEYWORD</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>xkcd::favs</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Favorite Comics Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>FAVS_KEYWORD</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>xkcd::random</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Random Comic Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>RANDOM_KEYWORD</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>xkcd::recent</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Recent Comics Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>RECENT_KEYWORD</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>xkcd::refresh</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Force Database Refresh</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>REFRESH_KEYWORD</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>10</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Refresh Rate (days)</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>REFRESH_RATE</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.1</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
