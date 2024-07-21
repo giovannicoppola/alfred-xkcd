@@ -3,6 +3,10 @@ A browser for xkcd comics
 ![](src/xkcd.png)
 If you are an xkcd fan and have ever tried to remember or find a particular comic, you might find this Workfklow helpful. 
 
+<a href="https://github.com/giovannicoppola/alfred-xkcd/releases/latest/">
+<img alt="Downloads"
+src="https://img.shields.io/github/downloads/giovannicoppola/alfred-xkcd/total?color=purple&label=Downloads"><br/>
+</a>
 
 # Usage
 - Search (default keyword: `xkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics. 
