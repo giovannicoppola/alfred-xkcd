@@ -62,7 +62,7 @@ def fetchRandom(database, num, unreads):
     
     
     result["items"].append({
-        "title": f"{r['title']} ({myDate}) {myFav}{myRead} [unread: {unreads:,}]",
+        "title": f"{r['title']} (#{comicsNum} {myDate}) {myFav}{myRead} [unread: {unreads:,}]",
         
         'subtitle': f"{r['alt']}",
         'valid': True,

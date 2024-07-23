@@ -9,6 +9,23 @@ import sqlite3
 sys.path.append(os.path.join(os.getcwd(), 'lib'))
 import requests
 
+
+
+def checkDatabase(data_folder):
+    
+    DB_ZIPPED = 'xkcd.sqlite.zip'
+    
+    if os.path.exists(DB_ZIPPED):  # there is a zipped database: distribution version
+        log ("found distribution database, extracting")
+        with zipfile.ZipFile(DB_ZIPPED, "r") as zip_ref:
+            zip_ref.extractall(DATA_FOLDER)
+        os.remove (DB_ZIPPED)
+    
+
+
+
+
+
 CACHE_FOLDER = os.getenv('alfred_workflow_cache')
 CACHE_FOLDER_RECENTS = CACHE_FOLDER+"/images/recents/"
 CACHE_FOLDER_FAVS = CACHE_FOLDER+"/images/favs/"
@@ -19,6 +36,7 @@ DATA_FOLDER = os.getenv('alfred_workflow_data')
 
 if not os.path.exists(DATA_FOLDER):
     os.makedirs(DATA_FOLDER)
+    checkDatabase(DATA_FOLDER)
 if not os.path.exists(CACHE_FOLDER):
     os.makedirs(CACHE_FOLDER)
 if not os.path.exists(CACHE_FOLDER_RECENTS):
@@ -35,18 +53,7 @@ def log(s, *args):
         s = s % args
     print(s, file=sys.stderr)
 
-def checkDatabase():
-    
-    DB_ZIPPED = 'xkcd.sqlite.zip'
-    
-    if os.path.exists(DB_ZIPPED):  # there is a zipped database: distribution version
-        log ("found distribution database, extracting")
-        with zipfile.ZipFile(DB_ZIPPED, "r") as zip_ref:
-            zip_ref.extractall(DATA_FOLDER)
-        os.remove (DB_ZIPPED)
-    
 
-checkDatabase()
 if not os.path.exists(COMICSMAX_FILE):
     COMICSMAX = 2962
     REFRESH_FLAG = True
