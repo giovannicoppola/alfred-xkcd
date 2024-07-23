@@ -38,7 +38,13 @@ def queryItems(database, myInput):
         conditions = []
 
         for term in search_terms:
-            conditions.append(f"(alt LIKE ? OR title LIKE ?)")
+            # check if term is an integer
+            if term.isdigit():
+                conditions.append(f"(alt LIKE ? OR title LIKE ? OR num = ?)")
+            
+            else:
+                conditions.append(f"(alt LIKE ? OR title LIKE ?)")
+
 
         query += " AND ".join(conditions)
         query += " ORDER BY NUM DESC"
@@ -48,6 +54,9 @@ def queryItems(database, myInput):
         for term in search_terms:
             params.append(f"%{term}%")
             params.append(f"%{term}%")
+            if term.isdigit():  # If the term is an integer, add it to the parameters as is
+                params.append(int(term))
+            
 
     # Execute the query
     cursor.execute(query, params)
@@ -81,7 +90,7 @@ def queryItems(database, myInput):
         
         
         result["items"].append({
-            "title": f"{r['title']} ({myDate}) {myFav}{myRead}",
+            "title": f"{r['title']} (#{comicsNum} {myDate}) {myFav}{myRead}",
             
             'subtitle': f"{myCounter:,}/{totCount:,} {r['alt']}",
             'valid': True,

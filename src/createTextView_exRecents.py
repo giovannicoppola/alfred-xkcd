@@ -38,6 +38,7 @@ def fetchOne(myNum):
 	
 	
 	comicDate = f"{r['year']}-{r['month']}-{r['day']}"
+	comicsNum = r['num']
 
 	myJSON = {
 	"variables": {
@@ -45,9 +46,9 @@ def fetchOne(myNum):
 	
 	},
 	#"rerun": 0.5,
-	"response": f"# {r['title']} \n![]({MYPATH}) \n{r['alt']}",
+	"response": f"#{r['title']} \n![]({MYPATH}) \n{r['alt']}",
 
-	"footer": f"{comicDate}",
+	"footer": f"#{comicsNum} {comicDate}",
 	"behaviour": {
 		"response": "append",
 		"scroll": "end",

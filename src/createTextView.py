@@ -41,7 +41,7 @@ myJSON = {
   #"rerun": 0.5,
   "response": f"# {myTitle} \n![]({imagePath}) \n{comicAlt}",
 
-  "footer": f"{comicDate}",
+  "footer": f"#{comicN} {comicDate}",
   "behaviour": {
     "response": "append",
     "scroll": "end",

@@ -367,7 +367,7 @@
 	<key>createdby</key>
 	<string>giovanni</string>
 	<key>description</key>
-	<string></string>
+	<string>a browser for xkcd comics</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -517,6 +517,24 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{var:comicPath}</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>D13F7E7D-71FB-4C75-945C-5B44B30C984A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -532,24 +550,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>89AEF6D6-39A7-4851-830D-821356E2E2C7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>target_path</key>
-					<string>{var:comicPath}</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>D13F7E7D-71FB-4C75-945C-5B44B30C984A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1180,7 +1180,7 @@
 	<string># alfred-xkcd
 A browser for xkcd comics
 ![](xkcd.png)
-If you are an xkcd fan and have ever tried to remember or find a particular comic, you might find this Workfklow helpful. 
+If you are an xkcd fan and have ever tried to remember or find a particular comic, you might find this Workflow helpful. 
 
 
 # Usage
@@ -1206,6 +1206,7 @@ If you are an xkcd fan and have ever tried to remember or find a particular comi
 
 # Feedback
 ... is welcome!
+
 https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 	<key>uidata</key>
 	<dict>
@@ -1470,7 +1471,7 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>xkcd::favs</string>
+				<string>xk::favs</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -1491,7 +1492,7 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>xkcd::random</string>
+				<string>xk::random</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -1512,7 +1513,7 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>xkcd::recent</string>
+				<string>xk::recent</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -1533,7 +1534,7 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>xkcd::refresh</string>
+				<string>xk::refresh</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -1554,7 +1555,7 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>10</string>
+				<string>3</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -1572,9 +1573,11 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<string>REFRESH_RATE</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>0.1</string>
+	<string>0.2</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/giovannicoppola/alfred-xkcd/</string>
 </dict>
 </plist>
