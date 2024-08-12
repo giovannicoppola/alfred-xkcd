@@ -18,7 +18,7 @@ def checkDatabase(data_folder):
     if os.path.exists(DB_ZIPPED):  # there is a zipped database: distribution version
         log ("found distribution database, extracting")
         with zipfile.ZipFile(DB_ZIPPED, "r") as zip_ref:
-            zip_ref.extractall(DATA_FOLDER)
+            zip_ref.extractall(data_folder)
         os.remove (DB_ZIPPED)
     
 
