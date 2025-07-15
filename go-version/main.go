@@ -118,12 +118,57 @@ func logMessage(msg string) {
 	fmt.Fprintf(os.Stderr, "%s\n", msg)
 }
 
+// formatNumberWithCommas formats an integer with thousand separators
+func formatNumberWithCommas(n int) string {
+	if n < 1000 {
+		return fmt.Sprintf("%d", n)
+	}
+
+	// Convert to string and add commas every 3 digits from the right
+	str := fmt.Sprintf("%d", n)
+	length := len(str)
+	result := ""
+
+	for i, digit := range str {
+		if i > 0 && (length-i)%3 == 0 {
+			result += ","
+		}
+		result += string(digit)
+	}
+
+	return result
+}
+
 func checkDatabase() {
 	dbZipped := "xkcd.sqlite.zip"
-	if _, err := os.Stat(dbZipped); err == nil {
-		logMessage("Found distribution database, extracting")
-		extractZip(dbZipped, DATA_FOLDER)
+
+	// Check if the zip file exists
+	if _, err := os.Stat(dbZipped); err != nil {
+		return // No zip file to extract
+	}
+
+	// Check if database already exists in data folder
+	if _, err := os.Stat(MY_DATABASE); err == nil {
+		logMessage("Database already exists in data folder, skipping extraction of xkcd.sqlite.zip")
+		return
+	}
+
+	// Database doesn't exist, extract the zip file
+	logMessage("Found distribution database, extracting")
+	err := extractZip(dbZipped, DATA_FOLDER)
+	if err != nil {
+		logMessage(fmt.Sprintf("Error extracting database: %v", err))
+		// Still try to remove the zip file even if extraction failed
 		os.Remove(dbZipped)
+		return
+	}
+
+	// Remove the zip file after successful extraction
+	err = os.Remove(dbZipped)
+	if err != nil {
+		logMessage(fmt.Sprintf("Warning: could not remove zip file: %v", err))
+	} else {
+		logMessage("Successfully removed xkcd.sqlite.zip after extraction")
 	}
 }
 
@@ -164,28 +209,28 @@ func extractZip(src, dest string) error {
 
 func checkRefreshFlag() {
 	if _, err := os.Stat(COMICSMAX_FILE); os.IsNotExist(err) {
-		COMICSMAX = 2962
+		COMICSMAX = 3116
 		REFRESH_FLAG = true
 		return
 	}
 
 	data, err := os.ReadFile(COMICSMAX_FILE)
 	if err != nil {
-		COMICSMAX = 2962
+		COMICSMAX = 3116
 		REFRESH_FLAG = true
 		return
 	}
 
 	lines := strings.Split(string(data), "\n")
 	if len(lines) < 2 {
-		COMICSMAX = 2962
+		COMICSMAX = 3116
 		REFRESH_FLAG = true
 		return
 	}
 
 	COMICSMAX, err = strconv.Atoi(strings.TrimSpace(lines[0]))
 	if err != nil {
-		COMICSMAX = 2962
+		COMICSMAX = 3116
 		REFRESH_FLAG = true
 		return
 	}
@@ -259,12 +304,12 @@ func toggleFavorite(num int) (string, error) {
 		// Remove from favorites
 		favPath := filepath.Join(CACHE_FOLDER_FAVS, fmt.Sprintf("%d.png", num))
 		os.Remove(favPath)
-		exitMessage = "Removed from favorites 🫤"
+		exitMessage = "Removed from favorites 💔"
 	} else {
 		// Add to favorites and mark as read
 		fetchComicsPath(num, img, "favs")
 		markAsRead(num) // Mark as read when adding to favorites
-		exitMessage = "Added to favorites ⭐️"
+		exitMessage = "Added to favorites ❤️"
 	}
 
 	_, err = db.Exec("UPDATE xkcd SET is_favorite = ? WHERE num = ?", !isFavorite, num)
@@ -431,10 +476,10 @@ func queryComics(input string) error {
 
 		if comic.IsFavorite {
 			fav = "❤️"
-			toggleFavText = "Remove from favorites 🫤"
+			toggleFavText = "💔 Remove from favorites"
 		} else {
 			fav = ""
-			toggleFavText = "⭐️ Add to favorites"
+			toggleFavText = "❤️ Add to favorites"
 		}
 
 		if comic.IsRead {
@@ -447,7 +492,7 @@ func queryComics(input string) error {
 
 		item := AlfredItem{
 			Title:        fmt.Sprintf("%s (#%d %s) %s%s", comic.Title, comic.Num, date, fav, read),
-			Subtitle:     fmt.Sprintf("%d/%d %s", i+1, len(comics), comic.Alt),
+			Subtitle:     fmt.Sprintf("%s/%s %s", formatNumberWithCommas(i+1), formatNumberWithCommas(len(comics)), comic.Alt),
 			Valid:        true,
 			Arg:          strconv.Itoa(comic.Num),
 			QuickLookURL: comic.Img,
@@ -469,6 +514,7 @@ func queryComics(input string) error {
 						"currQuery": input,
 						"imageURL":  comic.Img,
 						"comicDate": date,
+						"comicN":    comic.Num,
 					},
 				},
 				"shift": map[string]interface{}{
@@ -564,7 +610,7 @@ func randomComic() error {
 
 	if comic.IsFavorite {
 		fav = "❤️"
-		toggleFavText = "Remove from favorites 💔"
+		toggleFavText = "💔 Remove from favorites"
 	} else {
 		fav = ""
 		toggleFavText = "❤️ Add to favorites"
@@ -581,7 +627,7 @@ func randomComic() error {
 	output := AlfredOutput{
 		Items: []AlfredItem{
 			{
-				Title:        fmt.Sprintf("%s (#%d %s) %s%s [unread: %d]", comic.Title, comic.Num, date, fav, read, len(unreadNums)),
+				Title:        fmt.Sprintf("%s (#%d %s) %s%s [unread: %s]", comic.Title, comic.Num, date, fav, read, formatNumberWithCommas(len(unreadNums))),
 				Subtitle:     comic.Alt,
 				Valid:        true,
 				Arg:          strconv.Itoa(comic.Num),
@@ -815,11 +861,10 @@ func createTextView(numStr string) error {
 		footer = footer + " ❤️"
 	}
 
-	toggleFavText := "Remove from favorites 🫤"
+	toggleFavText := "💔 Remove from favorites"
 	output := TextViewOutput{
 		Variables: map[string]string{
 			"comicPath": imagePath,
-			"comicNum":  comicN,
 			"toggleFav": toggleFavText,
 		},
 		Response: fmt.Sprintf("# %s \n![](%s) \n%s", comicTitle, imagePath, comicAlt),
@@ -877,13 +922,16 @@ func createTextViewFromPath(imagePath string) error {
 
 	// Add ❤️ emoji to footer if it's a favorite
 	footer := fmt.Sprintf("#%d %s", comic.Num, date)
+	toggleFavText := "❤️ Add to favorites"
 	if isFav.Valid && isFav.Bool {
 		footer = footer + " ❤️"
+		toggleFavText = "💔 Remove from favorites"
 	}
 
 	output := TextViewOutput{
 		Variables: map[string]string{
 			"comicPath": imagePath,
+			"toggleFav": toggleFavText,
 		},
 		Response: fmt.Sprintf("#%s \n![](%s) \n%s", comic.Title, imagePath, comic.Alt),
 		Footer:   footer,

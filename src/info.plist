@@ -369,7 +369,7 @@
 	<key>description</key>
 	<string>a browser for xkcd comics</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>alfred-xkcd</string>
 	<key>objects</key>

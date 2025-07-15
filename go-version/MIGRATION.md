@@ -36,6 +36,7 @@ Replace each Python script call in your Alfred workflow with the corresponding G
 | `python fetchImage.py "{query}"` | `./xkcd-alfred fetch-image {query} $imageURL` |
 | `python createTextView.py "{query}"` | `./xkcd-alfred text-view {query}` |
 | `python createTextView_exRecents.py "{query}"` | `./xkcd-alfred text-view-path {query}` |
+| `python createTextView_exFavorites.py "{query}"` | `./xkcd-alfred text-view-path {query}` |
 | `python forceUpdate.py` | `./xkcd-alfred force-update` |
 
 ### 3. Update File Paths
@@ -145,6 +146,20 @@ python createTextView_exRecents.py "{query}"
 ```bash
 ./xkcd-alfred text-view-path {query}
 ```
+
+### Run Script: Create Text View from Favorites
+
+**Before:**
+```bash
+python createTextView_exFavorites.py "{query}"
+```
+
+**After:**
+```bash
+./xkcd-alfred text-view-path {query}
+```
+
+**Note:** The Go version uses the same `text-view-path` command for both recents and favorites, as it can handle any image path.
 
 ### Run Script: Force Update
 
