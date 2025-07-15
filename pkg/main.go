@@ -12,6 +12,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -279,7 +280,36 @@ func downloadImage(url, filepath string) error {
 }
 
 func openDB() (*sql.DB, error) {
-	return sql.Open("sqlite3", MY_DATABASE)
+	db, err := sql.Open("sqlite3", MY_DATABASE)
+	if err != nil {
+		return nil, err
+	}
+
+	// Create the table if it doesn't exist
+	createTableSQL := `
+	CREATE TABLE IF NOT EXISTS xkcd (
+		num INTEGER PRIMARY KEY,
+		title TEXT,
+		alt TEXT,
+		img TEXT,
+		year TEXT,
+		month TEXT,
+		day TEXT,
+		safe_title TEXT,
+		transcript TEXT,
+		link TEXT,
+		news TEXT,
+		is_favorite BOOLEAN DEFAULT 0,
+		is_read BOOLEAN DEFAULT 0
+	);`
+
+	_, err = db.Exec(createTableSQL)
+	if err != nil {
+		db.Close()
+		return nil, fmt.Errorf("error creating table: %v", err)
+	}
+
+	return db, nil
 }
 
 func toggleFavorite(num int) (string, error) {
@@ -504,6 +534,7 @@ func queryComics(input string) error {
 				"comicDate":  date,
 				"imagePath":  imagePath,
 				"toggleFav":  toggleFavText,
+				"isFavorite": comic.IsFavorite,
 			},
 			Mods: map[string]interface{}{
 				"ctrl": map[string]interface{}{
@@ -640,6 +671,7 @@ func randomComic() error {
 					"comicDate":  date,
 					"imagePath":  imagePath,
 					"toggleFav":  toggleFavText,
+					"isFavorite": comic.IsFavorite,
 				},
 				Mods: map[string]interface{}{
 					"ctrl": map[string]interface{}{
@@ -706,11 +738,18 @@ func favoriteGrid() error {
 		var comic Comic
 		rows.Scan(&comic.Num, &comic.Title, &comic.Alt, &comic.Img, &comic.Year, &comic.Month, &comic.Day)
 
+		// Since this is favoriteGrid, we know all items are favorites
+		comic.IsFavorite = true
+
 		comicsPath := fetchComicsPath(comic.Num, comic.Img, "favs")
 		date := fmt.Sprintf("%s-%s-%s", comic.Year, comic.Month, comic.Day)
 
+		// Since all items in favorites grid are favorites, we can hardcode the toggle text
+		toggleFavText := "💔 Remove from favorites"
+
 		item := AlfredItem{
 			Title:        comic.Title,
+			Valid:        true,
 			Subtitle:     comic.Alt,
 			Arg:          strconv.Itoa(comic.Num),
 			Icon:         map[string]string{"path": comicsPath},
@@ -723,10 +762,11 @@ func favoriteGrid() error {
 				"comicAlt":   comic.Alt,
 				"comicDate":  date,
 				"imagePath":  comicsPath,
+				"toggleFav":  toggleFavText,
 			},
 			Mods: map[string]interface{}{
 				"ctrl": map[string]interface{}{
-					"subtitle": "remove from favorites",
+					"subtitle": "💔 remove from favorites",
 					"arg":      comic.Num,
 				},
 				"shift": map[string]interface{}{
@@ -762,6 +802,157 @@ func favoriteGrid() error {
 	elapsed := time.Since(start)
 	logMessage(fmt.Sprintf("\nScript duration (favsGrid): %.3f seconds", elapsed.Seconds()))
 
+	return nil
+}
+
+func recentGrid() error {
+	start := time.Now()
+
+	if REFRESH_FLAG {
+		logMessage("Checking for updates")
+		checkUpdate(COMICSMAX)
+	}
+
+	logMessage(fmt.Sprintf("Reading from recents path: %s", CACHE_FOLDER_RECENTS))
+
+	files, err := os.ReadDir(CACHE_FOLDER_RECENTS)
+	if err != nil {
+		logMessage(fmt.Sprintf("Error reading directory: %v", err))
+		return fmt.Errorf("failed to read recents directory: %v", err)
+	}
+
+	logMessage(fmt.Sprintf("Found %d files in recents directory", len(files)))
+
+	// Sort files by modification time (most recent first)
+	sort.Slice(files, func(i, j int) bool {
+		infoI, errI := files[i].Info()
+		infoJ, errJ := files[j].Info()
+		if errI != nil || errJ != nil {
+			return false // Keep original order if we can't get file info
+		}
+		return infoI.ModTime().After(infoJ.ModTime())
+	})
+
+	// Open database to get comic details
+	db, err := openDB()
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+	output := AlfredOutput{Items: []AlfredItem{}}
+
+	// Process each image file in the recents folder
+	for i, file := range files {
+		if file.IsDir() || !strings.HasSuffix(file.Name(), ".png") {
+			logMessage(fmt.Sprintf("Skipping file: %s (is dir: %v)", file.Name(), file.IsDir()))
+			continue
+		}
+
+		// Extract comic number from filename (e.g., "123.png" -> 123)
+		filename := file.Name()
+		comicNumStr := strings.TrimSuffix(filename, ".png")
+		comicNum, err := strconv.Atoi(comicNumStr)
+		if err != nil {
+			logMessage(fmt.Sprintf("Skipping file with non-numeric name: %s", filename))
+			continue // Skip files that don't have numeric names
+		}
+
+		// logMessage(fmt.Sprintf("Processing comic number: %d", comicNum))
+
+		// Get comic details from database
+		var comic Comic
+		var isFav sql.NullBool
+		err = db.QueryRow("SELECT num, title, alt, img, year, month, day, is_favorite FROM xkcd WHERE num = ?", comicNum).Scan(
+			&comic.Num, &comic.Title, &comic.Alt, &comic.Img, &comic.Year, &comic.Month, &comic.Day, &isFav)
+		if err != nil {
+			// If comic not found in database, create a basic entry with the comic number
+			logMessage(fmt.Sprintf("Comic %d not found in database, creating basic entry", comicNum))
+			comic = Comic{
+				Num:   comicNum,
+				Title: fmt.Sprintf("XKCD #%d", comicNum),
+				Alt:   "Comic not yet in database",
+				Img:   fmt.Sprintf("https://imgs.xkcd.com/comics/%d.png", comicNum),
+				Year:  "Unknown",
+				Month: "Unknown",
+				Day:   "Unknown",
+			}
+			comic.IsFavorite = false // Default to not favorite for missing comics
+		} else {
+			comic.IsFavorite = isFav.Valid && isFav.Bool
+		}
+
+		comicsPath := filepath.Join(CACHE_FOLDER_RECENTS, filename)
+		date := fmt.Sprintf("%s-%s-%s", comic.Year, comic.Month, comic.Day)
+
+		// Set toggle favorite text based on current status
+		var toggleFavText string
+		var titleWithFavorite string
+		if comic.IsFavorite {
+			toggleFavText = "💔 Remove from favorites"
+			titleWithFavorite = comic.Title + " ❤️"
+		} else {
+			toggleFavText = "❤️ Add to favorites"
+			titleWithFavorite = comic.Title
+		}
+
+		item := AlfredItem{
+			Title:        titleWithFavorite,
+			Subtitle:     comic.Alt,
+			Valid:        true,
+			Arg:          strconv.Itoa(comic.Num),
+			Icon:         map[string]string{"path": comicsPath},
+			QuickLookURL: comic.Img,
+			Match:        fmt.Sprintf("%s %s", comic.Title, comic.Alt),
+			Variables: map[string]interface{}{
+				"imageURL":   comic.Img,
+				"comicTitle": comic.Title,
+				"comicN":     comic.Num,
+				"comicAlt":   comic.Alt,
+				"comicDate":  date,
+				"imagePath":  comicsPath,
+				"position":   i + 1, // Add position for reference
+				"toggleFav":  toggleFavText,
+				"crumble":    "recentGrid",
+			},
+			Mods: map[string]interface{}{
+				"ctrl": map[string]interface{}{
+					"subtitle": toggleFavText,
+					"arg":      comic.Num,
+				},
+				"shift": map[string]interface{}{
+					"subtitle": "copy to clipboard 📋️",
+					"arg":      comicsPath,
+				},
+				"cmd": map[string]interface{}{
+					"arg":      fmt.Sprintf("https://xkcd.com/%d", comic.Num),
+					"subtitle": "open on xkcd.com 🌐",
+				},
+				"alt": map[string]interface{}{
+					"valid":    true,
+					"arg":      fmt.Sprintf("https://www.explainxkcd.com/wiki/index.php/%d", comic.Num),
+					"subtitle": "open on explainxkcd.com 🌐",
+				},
+			},
+		}
+		output.Items = append(output.Items, item)
+	}
+
+	logMessage(fmt.Sprintf("Created %d items for output", len(output.Items)))
+
+	if len(output.Items) == 0 {
+		output.Items = append(output.Items, AlfredItem{
+			Title:    "No recent comics here 🫤",
+			Subtitle: "View some comics first!",
+			Arg:      "",
+			Icon:     map[string]string{"path": "icons/broken-heart.png"},
+		})
+	}
+
+	jsonOutput, _ := json.Marshal(output)
+	fmt.Print(string(jsonOutput))
+
+	logMessage(fmt.Sprintf("Recent grid completed in: %s", time.Since(start)))
 	return nil
 }
 
@@ -818,6 +1009,7 @@ func createTextView(numStr string) error {
 	comicAlt := os.Getenv("comicAlt")
 	comicDate := os.Getenv("comicDate")
 	imagePath := os.Getenv("imagePath")
+	isFavoriteStr := os.Getenv("isFavorite")
 
 	// Use comicN from environment variable if available, otherwise try to parse argument
 	var num int
@@ -841,33 +1033,46 @@ func createTextView(numStr string) error {
 	fetchComicsPath(num, imageURL, "recent")
 	markAsRead(num)
 
-	// Check if comic is a favorite to add ❤️ emoji to footer
-	db, err := openDB()
-	if err != nil {
-		return err
-	}
-	defer db.Close()
+	// Check if comic is a favorite from environment variable or database fallback
+	var isFavorite bool
+	if isFavoriteStr != "" {
+		// Use environment variable if available (from main query)
+		isFavorite = isFavoriteStr == "true"
+	} else {
+		// Fallback to database query if environment variable not available
+		db, err := openDB()
+		if err != nil {
+			return err
+		}
+		defer db.Close()
 
-	var isFav sql.NullBool
-	err = db.QueryRow("SELECT is_favorite FROM xkcd WHERE num = ?", num).Scan(&isFav)
-	if err != nil {
-		// If there's an error, just continue without the emoji
-		logMessage(fmt.Sprintf("Warning: could not check favorite status for comic %d: %v", num, err))
+		var isFav sql.NullBool
+		err = db.QueryRow("SELECT is_favorite FROM xkcd WHERE num = ?", num).Scan(&isFav)
+		if err != nil {
+			// If there's an error, just continue without the emoji
+			logMessage(fmt.Sprintf("Warning: could not check favorite status for comic %d: %v", num, err))
+			isFavorite = false
+		} else {
+			isFavorite = isFav.Valid && isFav.Bool
+		}
+		logMessage(fmt.Sprintf("Using favorite status from database: %t", isFavorite))
 	}
 
 	// Add ❤️ emoji to footer if it's a favorite
 	footer := fmt.Sprintf("#%s %s", comicN, comicDate)
-	if isFav.Valid && isFav.Bool {
+	var toggleFavText string
+	if isFavorite {
 		footer = footer + " ❤️"
+		toggleFavText = "💔 Remove from favorites"
+	} else {
+		toggleFavText = "❤️ Add to favorites"
 	}
-
-	toggleFavText := "💔 Remove from favorites"
 	output := TextViewOutput{
 		Variables: map[string]string{
 			"comicPath": imagePath,
 			"toggleFav": toggleFavText,
 		},
-		Response: fmt.Sprintf("# %s \n![](%s) \n%s", comicTitle, imagePath, comicAlt),
+		Response: fmt.Sprintf("# %s \n![](%s) \n%s", comicTitle, imageURL, comicAlt),
 		Footer:   footer,
 		Arg:      strconv.Itoa(num), // Add comic number as arg for toggle favorites
 		Behaviour: map[string]interface{}{
@@ -933,7 +1138,7 @@ func createTextViewFromPath(imagePath string) error {
 			"comicPath": imagePath,
 			"toggleFav": toggleFavText,
 		},
-		Response: fmt.Sprintf("#%s \n![](%s) \n%s", comic.Title, imagePath, comic.Alt),
+		Response: fmt.Sprintf("# %s \n![](%s) \n%s", comic.Title, comic.Img, comic.Alt),
 		Footer:   footer,
 		Arg:      strconv.Itoa(comic.Num), // Add comic number as arg for toggle favorites
 		Behaviour: map[string]interface{}{
@@ -1011,6 +1216,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  query <search_terms>     - Search for comics\n")
 		fmt.Fprintf(os.Stderr, "  random                   - Get random unread comic\n")
 		fmt.Fprintf(os.Stderr, "  favorites                - Show favorites grid\n")
+		fmt.Fprintf(os.Stderr, "  recents                   - Show recents grid\n")
 		fmt.Fprintf(os.Stderr, "  toggle-fav <num>         - Toggle favorite status\n")
 		fmt.Fprintf(os.Stderr, "  fetch-image <num> <url>  - Fetch comic image\n")
 		fmt.Fprintf(os.Stderr, "  text-view <num>          - Create text view\n")
@@ -1038,6 +1244,10 @@ func main() {
 		}
 	case "favorites":
 		if err := favoriteGrid(); err != nil {
+			log.Fatal(err)
+		}
+	case "recents":
+		if err := recentGrid(); err != nil {
 			log.Fatal(err)
 		}
 	case "toggle-fav":

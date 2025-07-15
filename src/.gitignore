@@ -6,6 +6,7 @@
 *.dylib
 xkcd-alfred
 xkcd-alfred-*
+bin/
 
 # Test binary
 main

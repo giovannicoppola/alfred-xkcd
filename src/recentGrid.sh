@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Wrapper script for text-view-path command (equivalent to createTextView_exRecents.py)
+# Wrapper script for recents command (equivalent to recentGrid)
 # This script calls the Go binary with proper path resolution
 
 # Get the directory where this script is located
@@ -19,5 +19,5 @@ fi
 # Make sure binary is executable
 chmod +x "$BINARY"
 
-# Call the binary with text-view-path command and pass all arguments
-exec "$BINARY" text-view-path "$@"
+# Call the binary with recents command
+exec "$BINARY" recents
