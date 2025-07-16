@@ -16,7 +16,7 @@ src="https://img.shields.io/github/downloads/giovannicoppola/alfred-xkcd/total?c
  
 
 ## On a selected comic:
-- <kbd>↩️</kbd> show in text view (comic will be marked as read)
+- <kbd>↩️</kbd> show (comic will be marked as read)
 -  <kbd>⇧</kbd><kbd>↩️</kbd>: copy comic image to clipboard
 - <kbd>⇧</kbd> (QuickLook): QuickLook image (`⇧` or `space` to quit). Using the arrow keys you can quickly review multiple comics (will not be marked as read)
 - <kbd>^</kbd><kbd>↩️</kbd>: toggle favorite status

@@ -858,6 +858,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>random</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>8EE25BCB-D821-4D66-B6F3-521317F65D86</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>behaviour</key>
 				<integer>2</integer>
 				<key>fontmode</key>
@@ -890,25 +909,6 @@
 			<string>alfred.workflow.userinterface.text</string>
 			<key>uid</key>
 			<string>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>random</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>8EE25BCB-D821-4D66-B6F3-521317F65D86</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1551,21 +1551,21 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># alfred-xkcd
+	<string># xkcd
 A browser for xkcd comics
 ![](xkcd.png)
 If you are an xkcd fan and have ever tried to remember or find a particular comic, you might find this Workflow helpful. 
 
 
 # Usage
-- Search (default keyword: `xkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics. 
-- Favorite (default keyword: `xk::favs`) or hotkey: favorite xkcd comics in grid view. 
-- Random (default keyword: `xk::random`) or hotkey: one random unread xkcd comic. 
-- Recent (default keyword: `xk::recent`) or hotkey: recently viewed xkcd comics in grid view. 
+- Search (default keyword: `xxkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics. 
+- Favorite (default keyword: `xxk::favs`) or hotkey: favorite xkcd comics in grid view. 
+- Random (default keyword: `xxk::random`) or hotkey: one random unread xkcd comic. 
+- Recent (default keyword: `xxk::recent`) or hotkey: recently viewed xkcd comics in grid view. 
  
 
-## While in list, random, or favorite view:
-- `↩️` show in text view (comic will be marked as read)
+## On a selected comic:
+- `↩️` show (comic will be marked as read)
 -  `⇧↩️`: copy comic image to clipboard
 -  `⇧` (QuickLook): QuickLook image (`⇧` or `space` to quit). Using the arrow keys you can quickly review multiple comics (will not be marked as read)
 -  `^↩️`: toggle favorite status
@@ -2091,6 +2091,8 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<string>REFRESH_RATE</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>1.0</string>
 	<key>webaddress</key>
