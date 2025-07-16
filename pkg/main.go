@@ -550,7 +550,7 @@ func queryComics(input string) error {
 				},
 				"shift": map[string]interface{}{
 					"valid":    true,
-					"arg":      comic.Num,
+					"arg":      imagePath,
 					"subtitle": "copy to clipboard 📋️",
 				},
 				"cmd": map[string]interface{}{
@@ -586,132 +586,6 @@ func queryComics(input string) error {
 	return nil
 }
 
-func randomComic() error {
-	start := time.Now()
-
-	if REFRESH_FLAG {
-		logMessage("Checking for updates")
-		checkUpdate(COMICSMAX)
-	}
-
-	db, err := openDB()
-	if err != nil {
-		return err
-	}
-	defer db.Close()
-
-	// Get all unread comics
-	rows, err := db.Query("SELECT num FROM xkcd WHERE is_read != 1 OR is_read IS NULL")
-	if err != nil {
-		return err
-	}
-	defer rows.Close()
-
-	var unreadNums []int
-	for rows.Next() {
-		var num int
-		rows.Scan(&num)
-		unreadNums = append(unreadNums, num)
-	}
-
-	if len(unreadNums) == 0 {
-		fmt.Print(`{"items":[{"title":"All comics read!","subtitle":"Great job!","arg":""}]}`)
-		return nil
-	}
-
-	// Pick random comic
-	randomNum := unreadNums[rand.Intn(len(unreadNums))]
-
-	// Fetch the comic details
-	var comic Comic
-	var isFav, isRead sql.NullBool
-	err = db.QueryRow("SELECT num, title, alt, img, year, month, day, is_favorite, is_read FROM xkcd WHERE num = ?", randomNum).
-		Scan(&comic.Num, &comic.Title, &comic.Alt, &comic.Img, &comic.Year, &comic.Month, &comic.Day, &isFav, &isRead)
-	if err != nil {
-		return err
-	}
-
-	comic.IsFavorite = isFav.Bool
-	comic.IsRead = isRead.Bool
-
-	date := fmt.Sprintf("%s-%s-%s", comic.Year, comic.Month, comic.Day)
-
-	var fav, read string
-	var toggleFavText string
-
-	if comic.IsFavorite {
-		fav = "❤️"
-		toggleFavText = "💔 Remove from favorites"
-	} else {
-		fav = ""
-		toggleFavText = "❤️ Add to favorites"
-	}
-
-	if comic.IsRead {
-		read = ""
-	} else {
-		read = "•"
-	}
-
-	imagePath := filepath.Join(CACHE_FOLDER_RECENTS, fmt.Sprintf("%d.png", comic.Num))
-
-	output := AlfredOutput{
-		Items: []AlfredItem{
-			{
-				Title:        fmt.Sprintf("%s (#%d %s) %s%s [unread: %s]", comic.Title, comic.Num, date, fav, read, formatNumberWithCommas(len(unreadNums))),
-				Subtitle:     comic.Alt,
-				Valid:        true,
-				Arg:          strconv.Itoa(comic.Num),
-				QuickLookURL: comic.Img,
-				Variables: map[string]interface{}{
-					"imageURL":   comic.Img,
-					"comicTitle": comic.Title,
-					"comicN":     comic.Num,
-					"comicAlt":   comic.Alt,
-					"comicDate":  date,
-					"imagePath":  imagePath,
-					"toggleFav":  toggleFavText,
-					"isFavorite": comic.IsFavorite,
-				},
-				Mods: map[string]interface{}{
-					"ctrl": map[string]interface{}{
-						"valid":    true,
-						"arg":      comic.Num,
-						"subtitle": toggleFavText,
-						"variables": map[string]interface{}{
-							"imageURL":  comic.Img,
-							"comicDate": date,
-						},
-					},
-					"shift": map[string]interface{}{
-						"valid":    true,
-						"arg":      comic.Num,
-						"subtitle": "copy to clipboard 📋️",
-					},
-					"cmd": map[string]interface{}{
-						"valid":    true,
-						"arg":      fmt.Sprintf("https://xkcd.com/%d", comic.Num),
-						"subtitle": "open on xkcd.com 🌐",
-					},
-					"alt": map[string]interface{}{
-						"valid":    true,
-						"arg":      fmt.Sprintf("https://www.explainxkcd.com/wiki/index.php/%d", comic.Num),
-						"subtitle": "open on explainxkcd.com 🌐",
-					},
-				},
-			},
-		},
-	}
-
-	jsonOutput, _ := json.Marshal(output)
-	fmt.Print(string(jsonOutput))
-
-	elapsed := time.Since(start)
-	logMessage(fmt.Sprintf("\nScript duration (random): %.3f seconds", elapsed.Seconds()))
-
-	return nil
-}
-
 func favoriteGrid() error {
 	start := time.Now()
 
@@ -732,7 +606,14 @@ func favoriteGrid() error {
 	}
 	defer rows.Close()
 
-	output := AlfredOutput{Items: []AlfredItem{}}
+	// Collect all favorite comics with their file info for sorting
+	type favoriteWithFileInfo struct {
+		comic   Comic
+		modTime time.Time
+		path    string
+	}
+
+	var favoritesWithInfo []favoriteWithFileInfo
 
 	for rows.Next() {
 		var comic Comic
@@ -742,13 +623,41 @@ func favoriteGrid() error {
 		comic.IsFavorite = true
 
 		comicsPath := fetchComicsPath(comic.Num, comic.Img, "favs")
+
+		// Get file modification time for sorting
+		fileInfo, err := os.Stat(comicsPath)
+		var modTime time.Time
+		if err == nil {
+			modTime = fileInfo.ModTime()
+		} else {
+			// If we can't get file info, use zero time (will be sorted last)
+			modTime = time.Time{}
+		}
+
+		favoritesWithInfo = append(favoritesWithInfo, favoriteWithFileInfo{
+			comic:   comic,
+			modTime: modTime,
+			path:    comicsPath,
+		})
+	}
+
+	// Sort by modification time (most recent first)
+	sort.Slice(favoritesWithInfo, func(i, j int) bool {
+		return favoritesWithInfo[i].modTime.After(favoritesWithInfo[j].modTime)
+	})
+
+	output := AlfredOutput{Items: []AlfredItem{}}
+
+	for _, favoriteInfo := range favoritesWithInfo {
+		comic := favoriteInfo.comic
+		comicsPath := favoriteInfo.path
 		date := fmt.Sprintf("%s-%s-%s", comic.Year, comic.Month, comic.Day)
 
 		// Since all items in favorites grid are favorites, we can hardcode the toggle text
 		toggleFavText := "💔 Remove from favorites"
 
 		item := AlfredItem{
-			Title:        comic.Title,
+			Title:        comic.Title + " ❤️",
 			Valid:        true,
 			Subtitle:     comic.Alt,
 			Arg:          strconv.Itoa(comic.Num),
@@ -763,6 +672,7 @@ func favoriteGrid() error {
 				"comicDate":  date,
 				"imagePath":  comicsPath,
 				"toggleFav":  toggleFavText,
+				"crumb":      "favsGrid",
 			},
 			Mods: map[string]interface{}{
 				"ctrl": map[string]interface{}{
@@ -770,8 +680,9 @@ func favoriteGrid() error {
 					"arg":      comic.Num,
 				},
 				"shift": map[string]interface{}{
-					"subtitle": "copy to clipboard 📋️",
+					"valid":    true,
 					"arg":      comicsPath,
+					"subtitle": "copy to clipboard 📋️",
 				},
 				"cmd": map[string]interface{}{
 					"arg":      fmt.Sprintf("https://xkcd.com/%d", comic.Num),
@@ -812,8 +723,6 @@ func recentGrid() error {
 		logMessage("Checking for updates")
 		checkUpdate(COMICSMAX)
 	}
-
-	logMessage(fmt.Sprintf("Reading from recents path: %s", CACHE_FOLDER_RECENTS))
 
 	files, err := os.ReadDir(CACHE_FOLDER_RECENTS)
 	if err != nil {
@@ -913,7 +822,7 @@ func recentGrid() error {
 				"imagePath":  comicsPath,
 				"position":   i + 1, // Add position for reference
 				"toggleFav":  toggleFavText,
-				"crumble":    "recentGrid",
+				"crumb":      "recentGrid",
 			},
 			Mods: map[string]interface{}{
 				"ctrl": map[string]interface{}{
@@ -921,8 +830,9 @@ func recentGrid() error {
 					"arg":      comic.Num,
 				},
 				"shift": map[string]interface{}{
-					"subtitle": "copy to clipboard 📋️",
+					"valid":    true,
 					"arg":      comicsPath,
+					"subtitle": "copy to clipboard 📋️",
 				},
 				"cmd": map[string]interface{}{
 					"arg":      fmt.Sprintf("https://xkcd.com/%d", comic.Num),
@@ -1009,7 +919,6 @@ func createTextView(numStr string) error {
 	comicAlt := os.Getenv("comicAlt")
 	comicDate := os.Getenv("comicDate")
 	isFavoriteStr := os.Getenv("isFavorite")
-	toggleFav := os.Getenv("toggleFav")
 
 	// Use comicN from environment variable if available, otherwise try to parse argument
 	var num int
@@ -1020,13 +929,11 @@ func createTextView(numStr string) error {
 		if err != nil {
 			return fmt.Errorf("invalid comic number in comicN environment variable: %s", comicN)
 		}
-		logMessage(fmt.Sprintf("Using comic number from environment: %d", num))
 	} else {
 		num, err = strconv.Atoi(numStr)
 		if err != nil {
 			return fmt.Errorf("could not parse comic number from input '%s'", numStr)
 		}
-		logMessage(fmt.Sprintf("Using comic number from argument: %d", num))
 	}
 
 	// If imageURL is not set, get it from the database
@@ -1083,7 +990,6 @@ func createTextView(numStr string) error {
 	} else {
 		toggleFavText = "❤️ Add to favorites"
 	}
-	logMessage(fmt.Sprintf("current toggleFav: %s", toggleFav))
 
 	output := TextViewOutput{
 		Variables: map[string]string{
@@ -1136,15 +1042,15 @@ func randomTextView() error {
 	}
 
 	if len(unreadNums) == 0 {
-		// Return a simple message if all comics are read
-		output := TextViewOutput{
-			Response: "# All comics read! 🎉\n\nGreat job! You've read all the comics.",
-			Footer:   "No unread comics",
-			Behaviour: map[string]interface{}{
-				"response":   "append",
-				"scroll":     "end",
-				"inputfield": "select",
+		// Emit JSON for no unread comics case
+		alfredVars := map[string]interface{}{
+			"variables": map[string]string{
+				"comicN":    "",
+				"toggleFav": "",
 			},
+		}
+		output := map[string]interface{}{
+			"alfredworkflow": alfredVars,
 		}
 		jsonOutput, _ := json.Marshal(output)
 		fmt.Print(string(jsonOutput))
@@ -1166,21 +1072,34 @@ func randomTextView() error {
 	comic.IsFavorite = isFav.Valid && isFav.Bool
 	comic.IsRead = isRead.Valid && isRead.Bool
 
-	// Set environment variables that createTextView expects
-	os.Setenv("comicTitle", comic.Title)
-	os.Setenv("imageURL", comic.Img)
-	os.Setenv("comicN", strconv.Itoa(comic.Num))
-	os.Setenv("comicAlt", comic.Alt)
-	os.Setenv("comicDate", fmt.Sprintf("%s-%s-%s", comic.Year, comic.Month, comic.Day))
-	os.Setenv("toggleFav", "❤️ Add to favorites") // Default toggle text
+	// Determine toggle favorite text
+	var toggleFavText string
 	if comic.IsFavorite {
-		os.Setenv("isFavorite", "1")
+		toggleFavText = "💔 Remove from favorites"
 	} else {
-		os.Setenv("isFavorite", "")
+		toggleFavText = "❤️ Add to favorites"
 	}
 
-	// Call createTextView with the comic number
-	return createTextView(strconv.Itoa(comic.Num))
+	// Emit Alfred workflow JSON with comicN and toggleFav
+	alfredVars := map[string]interface{}{
+		"variables": map[string]string{
+			"comicN":     strconv.Itoa(comic.Num),
+			"toggleFav":  toggleFavText,
+			"comicTitle": comic.Title,
+			"imageURL":   comic.Img,
+			"comicAlt":   comic.Alt,
+			"comicDate":  fmt.Sprintf("%s-%s-%s", comic.Year, comic.Month, comic.Day),
+			"isFavorite": strconv.FormatBool(comic.IsFavorite),
+			"crumb":      "random",
+		},
+	}
+	output := map[string]interface{}{
+		"alfredworkflow": alfredVars,
+	}
+	jsonOutput, _ := json.Marshal(output)
+	fmt.Print(string(jsonOutput))
+
+	return nil
 }
 
 func createTextViewFromPath(imagePath string) error {
@@ -1229,6 +1148,7 @@ func createTextViewFromPath(imagePath string) error {
 		Variables: map[string]string{
 			"comicPath": imagePath,
 			"toggleFav": toggleFavText,
+			"crumb":     "random",
 		},
 		Response: fmt.Sprintf("# %s \n![](%s) \n%s", comic.Title, comic.Img, comic.Alt),
 		Footer:   footer,
@@ -1306,14 +1226,13 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Usage: %s <command> [args...]\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "Commands:\n")
 		fmt.Fprintf(os.Stderr, "  query <search_terms>     - Search for comics\n")
-		fmt.Fprintf(os.Stderr, "  random                   - Get random unread comic\n")
+		fmt.Fprintf(os.Stderr, "  random                   - Get random unread comic (emit JSON variables)\n")
 		fmt.Fprintf(os.Stderr, "  favorites                - Show favorites grid\n")
 		fmt.Fprintf(os.Stderr, "  recents                   - Show recents grid\n")
 		fmt.Fprintf(os.Stderr, "  toggle-fav <num>         - Toggle favorite status\n")
 		fmt.Fprintf(os.Stderr, "  fetch-image <num> <url>  - Fetch comic image\n")
 		fmt.Fprintf(os.Stderr, "  text-view <num>          - Create text view\n")
 		fmt.Fprintf(os.Stderr, "  text-view-path <path>    - Create text view from image path\n")
-		fmt.Fprintf(os.Stderr, "  random-text-view         - Show random unread comic in text view\n")
 		fmt.Fprintf(os.Stderr, "  force-update             - Force database update\n")
 		os.Exit(1)
 	}
@@ -1332,7 +1251,7 @@ func main() {
 			log.Fatal(err)
 		}
 	case "random":
-		if err := randomComic(); err != nil {
+		if err := randomTextView(); err != nil {
 			log.Fatal(err)
 		}
 	case "favorites":
@@ -1375,10 +1294,6 @@ func main() {
 			log.Fatal("Usage: text-view-path <image_path>")
 		}
 		if err := createTextViewFromPath(os.Args[2]); err != nil {
-			log.Fatal(err)
-		}
-	case "random-text-view":
-		if err := randomTextView(); err != nil {
 			log.Fatal(err)
 		}
 	case "force-update":
