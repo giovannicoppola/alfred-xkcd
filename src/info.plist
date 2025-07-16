@@ -359,16 +359,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>50FF5762-1C8C-48DC-B63D-525BD5BE8EDE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>8EE25BCB-D821-4D66-B6F3-521317F65D86</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -376,6 +366,16 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>DDCE05A1-2073-43E3-BF66-97CC6A5ED1A5</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>50FF5762-1C8C-48DC-B63D-525BD5BE8EDE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -840,7 +840,7 @@
 			<key>config</key>
 			<dict>
 				<key>externaltriggerid</key>
-				<string>mainSearch</string>
+				<string>gridRecent</string>
 				<key>passinputasargument</key>
 				<true/>
 				<key>passvariables</key>
@@ -851,7 +851,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>50FF5762-1C8C-48DC-B63D-525BD5BE8EDE</string>
+			<string>24951DEC-9F04-4D60-A617-EA50BFAC906D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -890,6 +890,25 @@
 			<string>alfred.workflow.userinterface.text</string>
 			<key>uid</key>
 			<string>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>random</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>8EE25BCB-D821-4D66-B6F3-521317F65D86</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1091,7 +1110,7 @@
 			<key>config</key>
 			<dict>
 				<key>externaltriggerid</key>
-				<string>gridRecent</string>
+				<string>mainSearch</string>
 				<key>passinputasargument</key>
 				<true/>
 				<key>passvariables</key>
@@ -1102,26 +1121,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>24951DEC-9F04-4D60-A617-EA50BFAC906D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>random</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>8EE25BCB-D821-4D66-B6F3-521317F65D86</string>
+			<string>50FF5762-1C8C-48DC-B63D-525BD5BE8EDE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1598,7 +1598,7 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>xpos</key>
 			<real>935</real>
 			<key>ypos</key>
-			<real>255</real>
+			<real>195</real>
 		</dict>
 		<key>181CD7A5-E4A4-4291-83B4-32954AB05827</key>
 		<dict>
@@ -1621,9 +1621,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 		<key>24951DEC-9F04-4D60-A617-EA50BFAC906D</key>
 		<dict>
 			<key>xpos</key>
-			<real>1120</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>275</real>
 		</dict>
 		<key>2A43A677-7ED0-4081-B995-14F8B8CBA6E5</key>
 		<dict>
@@ -1689,9 +1689,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>1115</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>405</real>
 		</dict>
 		<key>51016663-D536-4D22-85FA-EE53F6F3869D</key>
 		<dict>
@@ -1792,7 +1792,7 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>xpos</key>
 			<real>910</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>290</real>
 		</dict>
 		<key>940E827E-E6B2-41A3-8325-B423817E6AAF</key>
 		<dict>
