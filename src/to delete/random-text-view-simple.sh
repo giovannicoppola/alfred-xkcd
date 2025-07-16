@@ -9,7 +9,7 @@ fi
 
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-XKCD_BINARY="$SCRIPT_DIR/../src/xkcd-alfred"
+XKCD_BINARY="$SCRIPT_DIR/xkcd-alfred"
 
 # Check if the binary exists
 if [ ! -f "$XKCD_BINARY" ]; then
@@ -64,7 +64,12 @@ export comicN="$COMIC_NUM"
 export comicAlt="$COMIC_ALT"
 export comicDate="$COMIC_DATE"
 export imagePath="$IMAGE_PATH"
-export isFavorite="$IS_FAVORITE"  # Use the actual favorite status from the random output
+# Convert boolean to the format expected by the Go code
+if [ "$IS_FAVORITE" = "true" ]; then
+    export isFavorite="1"
+else
+    export isFavorite=""
+fi
 
 # Run the text-view command with the comic number
 "$XKCD_BINARY" text-view "$COMIC_NUM"

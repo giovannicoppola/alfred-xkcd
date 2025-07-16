@@ -1008,8 +1008,8 @@ func createTextView(numStr string) error {
 	comicN := os.Getenv("comicN")
 	comicAlt := os.Getenv("comicAlt")
 	comicDate := os.Getenv("comicDate")
-	imagePath := os.Getenv("imagePath")
 	isFavoriteStr := os.Getenv("isFavorite")
+	toggleFav := os.Getenv("toggleFav")
 
 	// Use comicN from environment variable if available, otherwise try to parse argument
 	var num int
@@ -1029,15 +1029,31 @@ func createTextView(numStr string) error {
 		logMessage(fmt.Sprintf("Using comic number from argument: %d", num))
 	}
 
+	// If imageURL is not set, get it from the database
+	if imageURL == "" {
+		db, err := openDB()
+		if err != nil {
+			return err
+		}
+		defer db.Close()
+
+		err = db.QueryRow("SELECT img FROM xkcd WHERE num = ?", num).Scan(&imageURL)
+		if err != nil {
+			return fmt.Errorf("could not get image URL for comic %d: %v", num, err)
+		}
+		logMessage(fmt.Sprintf("Retrieved image URL from database: %s", imageURL))
+	}
+
 	// Fetch image and mark as read
-	fetchComicsPath(num, imageURL, "recent")
+	comicsPath := fetchComicsPath(num, imageURL, "recent")
 	markAsRead(num)
 
 	// Check if comic is a favorite from environment variable or database fallback
 	var isFavorite bool
 	if isFavoriteStr != "" {
 		// Use environment variable if available (from main query)
-		isFavorite = isFavoriteStr == "true"
+		// Handle both "true" and "1" as true values
+		isFavorite = isFavoriteStr == "true" || isFavoriteStr == "1"
 	} else {
 		// Fallback to database query if environment variable not available
 		db, err := openDB()
@@ -1067,12 +1083,14 @@ func createTextView(numStr string) error {
 	} else {
 		toggleFavText = "❤️ Add to favorites"
 	}
+	logMessage(fmt.Sprintf("current toggleFav: %s", toggleFav))
+
 	output := TextViewOutput{
 		Variables: map[string]string{
-			"comicPath": imagePath,
+			"comicPath": comicsPath,
 			"toggleFav": toggleFavText,
 		},
-		Response: fmt.Sprintf("# %s \n![](%s) \n%s", comicTitle, imageURL, comicAlt),
+		Response: fmt.Sprintf("# %s \n![](%s) \n%s", comicTitle, comicsPath, comicAlt),
 		Footer:   footer,
 		Arg:      strconv.Itoa(num), // Add comic number as arg for toggle favorites
 		Behaviour: map[string]interface{}{
@@ -1089,6 +1107,80 @@ func createTextView(numStr string) error {
 	logMessage(fmt.Sprintf("\nScript duration (create textView): %.3f seconds", elapsed.Seconds()))
 
 	return nil
+}
+
+func randomTextView() error {
+	if REFRESH_FLAG {
+		logMessage("Checking for updates")
+		checkUpdate(COMICSMAX)
+	}
+
+	db, err := openDB()
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+	// Get all unread comics
+	rows, err := db.Query("SELECT num FROM xkcd WHERE is_read != 1 OR is_read IS NULL")
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+
+	var unreadNums []int
+	for rows.Next() {
+		var num int
+		rows.Scan(&num)
+		unreadNums = append(unreadNums, num)
+	}
+
+	if len(unreadNums) == 0 {
+		// Return a simple message if all comics are read
+		output := TextViewOutput{
+			Response: "# All comics read! 🎉\n\nGreat job! You've read all the comics.",
+			Footer:   "No unread comics",
+			Behaviour: map[string]interface{}{
+				"response":   "append",
+				"scroll":     "end",
+				"inputfield": "select",
+			},
+		}
+		jsonOutput, _ := json.Marshal(output)
+		fmt.Print(string(jsonOutput))
+		return nil
+	}
+
+	// Pick random comic
+	randomNum := unreadNums[rand.Intn(len(unreadNums))]
+
+	// Fetch the comic details
+	var comic Comic
+	var isFav, isRead sql.NullBool
+	err = db.QueryRow("SELECT num, title, alt, img, year, month, day, is_favorite, is_read FROM xkcd WHERE num = ?", randomNum).
+		Scan(&comic.Num, &comic.Title, &comic.Alt, &comic.Img, &comic.Year, &comic.Month, &comic.Day, &isFav, &isRead)
+	if err != nil {
+		return err
+	}
+
+	comic.IsFavorite = isFav.Valid && isFav.Bool
+	comic.IsRead = isRead.Valid && isRead.Bool
+
+	// Set environment variables that createTextView expects
+	os.Setenv("comicTitle", comic.Title)
+	os.Setenv("imageURL", comic.Img)
+	os.Setenv("comicN", strconv.Itoa(comic.Num))
+	os.Setenv("comicAlt", comic.Alt)
+	os.Setenv("comicDate", fmt.Sprintf("%s-%s-%s", comic.Year, comic.Month, comic.Day))
+	os.Setenv("toggleFav", "❤️ Add to favorites") // Default toggle text
+	if comic.IsFavorite {
+		os.Setenv("isFavorite", "1")
+	} else {
+		os.Setenv("isFavorite", "")
+	}
+
+	// Call createTextView with the comic number
+	return createTextView(strconv.Itoa(comic.Num))
 }
 
 func createTextViewFromPath(imagePath string) error {
@@ -1221,6 +1313,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  fetch-image <num> <url>  - Fetch comic image\n")
 		fmt.Fprintf(os.Stderr, "  text-view <num>          - Create text view\n")
 		fmt.Fprintf(os.Stderr, "  text-view-path <path>    - Create text view from image path\n")
+		fmt.Fprintf(os.Stderr, "  random-text-view         - Show random unread comic in text view\n")
 		fmt.Fprintf(os.Stderr, "  force-update             - Force database update\n")
 		os.Exit(1)
 	}
@@ -1282,6 +1375,10 @@ func main() {
 			log.Fatal("Usage: text-view-path <image_path>")
 		}
 		if err := createTextViewFromPath(os.Args[2]); err != nil {
+			log.Fatal(err)
+		}
+	case "random-text-view":
+		if err := randomTextView(); err != nil {
 			log.Fatal(err)
 		}
 	case "force-update":

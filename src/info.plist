@@ -6,6 +6,19 @@
 	<string>giovanni.xkcd</string>
 	<key>connections</key>
 	<dict>
+		<key>0F213B84-FB2C-4276-976A-E85F8160BC7B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>51016663-D536-4D22-85FA-EE53F6F3869D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>11C547C1-700D-4254-BEF4-5BB71FE439EE</key>
 		<array>
 			<dict>
@@ -59,7 +72,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</string>
+				<string>8E8827E3-EEB1-45EC-B1A5-1E40784436CD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -102,21 +115,21 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>637B252C-27FF-4443-ADF9-3EBAA7BDD53D</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>Copy image to clipboard 🖼️</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>7E5A3347-773C-4402-95C4-37BB636D73AB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>637B252C-27FF-4443-ADF9-3EBAA7BDD53D</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>Copy image to clipboard 🖼️</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -312,6 +325,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8E8827E3-EEB1-45EC-B1A5-1E40784436CD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BA242782-AFE6-4A7E-8A4F-C216E955ECB4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9EF88AC2-1A66-4C9E-AC0C-30460AC0B102</key>
 		<array>
 			<dict>
@@ -400,7 +426,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E47042E7-6C75-416B-A80F-F901E2BCB291</string>
+				<string>0F213B84-FB2C-4276-976A-E85F8160BC7B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -655,37 +681,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>9</integer>
-				<key>hotmod</key>
-				<integer>1572864</integer>
-				<key>hotstring</key>
-				<string>V</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>B42692BF-C43A-4EA6-B9DD-471079F3FD8E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>externaltriggerid</key>
 				<string>mainTextView</string>
 				<key>passinputasargument</key>
@@ -770,39 +765,6 @@
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
 			<string>1F77E224-3D3C-4220-BDAE-5C8B03A07898</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>behaviour</key>
-				<integer>2</integer>
-				<key>fontmode</key>
-				<integer>0</integer>
-				<key>fontsizing</key>
-				<integer>0</integer>
-				<key>footertext</key>
-				<string></string>
-				<key>inputfile</key>
-				<string>random-text-view.sh</string>
-				<key>inputtype</key>
-				<integer>1</integer>
-				<key>loadingtext</key>
-				<string></string>
-				<key>outputmode</key>
-				<integer>0</integer>
-				<key>scriptinput</key>
-				<integer>0</integer>
-				<key>spellchecking</key>
-				<integer>0</integer>
-				<key>stackview</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.userinterface.text</string>
-			<key>uid</key>
-			<string>E47042E7-6C75-416B-A80F-F901E2BCB291</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -916,6 +878,37 @@
 			<string>9E116514-7F49-409C-A3A4-E5B536CAD3DE</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>9</integer>
+				<key>hotmod</key>
+				<integer>1572864</integer>
+				<key>hotstring</key>
+				<string>V</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>B42692BF-C43A-4EA6-B9DD-471079F3FD8E</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1049,21 +1042,43 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>Image copied to clipboard 🖼️</string>
+				<key>externaltriggerid</key>
+				<string>mainTextView</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>42B77FF6-6265-4118-B866-1029D095FA97</string>
+			<string>51016663-D536-4D22-85FA-EE53F6F3869D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>comicN</key>
+					<string>3082</string>
+					<key>textSource</key>
+					<string>random-text-view.sh</string>
+					<key>toggleFav</key>
+					<string>add caz</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>0F213B84-FB2C-4276-976A-E85F8160BC7B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1097,7 +1112,7 @@
 			<key>config</key>
 			<dict>
 				<key>externaltriggerid</key>
-				<string>copyImagePath</string>
+				<string>mainTextView</string>
 				<key>passinputasargument</key>
 				<true/>
 				<key>passvariables</key>
@@ -1108,7 +1123,48 @@
 			<key>type</key>
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>637B252C-27FF-4443-ADF9-3EBAA7BDD53D</string>
+			<string>BA242782-AFE6-4A7E-8A4F-C216E955ECB4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>textSource</key>
+					<string>text-view.sh</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>8E8827E3-EEB1-45EC-B1A5-1E40784436CD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Image copied to clipboard 🖼️</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>42B77FF6-6265-4118-B866-1029D095FA97</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1138,40 +1194,44 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>behaviour</key>
-				<integer>2</integer>
-				<key>fontmode</key>
-				<integer>0</integer>
-				<key>fontsizing</key>
-				<integer>0</integer>
-				<key>footertext</key>
-				<string></string>
-				<key>inputfile</key>
-				<string>text-view.sh</string>
-				<key>inputtype</key>
-				<integer>1</integer>
-				<key>loadingtext</key>
-				<string></string>
-				<key>outputmode</key>
-				<integer>0</integer>
-				<key>scriptinput</key>
-				<integer>0</integer>
-				<key>spellchecking</key>
-				<integer>0</integer>
-				<key>stackview</key>
+				<key>externaltriggerid</key>
+				<string>copyImagePath</string>
+				<key>passinputasargument</key>
 				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>mainTextView</string>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.userinterface.text</string>
+			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</string>
+			<string>637B252C-27FF-4443-ADF9-3EBAA7BDD53D</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./xkcd-alfred toggle-fav $comicN</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>34A6D4A9-8984-4D8C-99B7-168C8205F0C2</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1198,29 +1258,6 @@
 			<string>685FFD37-914F-4216-B826-F01A7488F8E6</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>./xkcd-alfred toggle-fav $comicN</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>34A6D4A9-8984-4D8C-99B7-168C8205F0C2</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1317,6 +1354,65 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>601CFF4B-2B59-477F-8EDD-074F00AB2309</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>behaviour</key>
+				<integer>2</integer>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
+				<string></string>
+				<key>inputfile</key>
+				<string>{var:textSource}</string>
+				<key>inputtype</key>
+				<integer>1</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>mainTextView</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>30E90ECC-C30B-4670-9CBA-446D8DD1FCB4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -1337,27 +1433,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>73968966-FB91-44DF-BA53-27829C99DE93</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>601CFF4B-2B59-477F-8EDD-074F00AB2309</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1428,6 +1503,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>mainTextView</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>8FE7A1F7-7AA9-4A49-ABB2-7775E3E0E202</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1478,25 +1572,6 @@
 			<key>config</key>
 			<dict>
 				<key>externaltriggerid</key>
-				<string>gridRecent</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>24951DEC-9F04-4D60-A617-EA50BFAC906D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
 				<string>mainSearch</string>
 				<key>passinputasargument</key>
 				<true/>
@@ -1509,6 +1584,25 @@
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
 			<string>EC7EC524-86E8-4D72-96B0-C83B18FD647A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>gridRecent</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>24951DEC-9F04-4D60-A617-EA50BFAC906D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1617,6 +1711,13 @@ If you are an xkcd fan and have ever tried to remember or find a particular comi
 https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 	<key>uidata</key>
 	<dict>
+		<key>0F213B84-FB2C-4276-976A-E85F8160BC7B</key>
+		<dict>
+			<key>xpos</key>
+			<real>1590</real>
+			<key>ypos</key>
+			<real>610</real>
+		</dict>
 		<key>11C547C1-700D-4254-BEF4-5BB71FE439EE</key>
 		<dict>
 			<key>colorindex</key>
@@ -1658,9 +1759,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 		<key>24951DEC-9F04-4D60-A617-EA50BFAC906D</key>
 		<dict>
 			<key>xpos</key>
-			<real>1700</real>
+			<real>2140</real>
 			<key>ypos</key>
-			<real>1170</real>
+			<real>1235</real>
 		</dict>
 		<key>2A43A677-7ED0-4081-B995-14F8B8CBA6E5</key>
 		<dict>
@@ -1683,9 +1784,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>830</real>
+			<real>1235</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>945</real>
 		</dict>
 		<key>34A6D4A9-8984-4D8C-99B7-168C8205F0C2</key>
 		<dict>
@@ -1701,16 +1802,16 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 		<key>360A2390-F6D4-4B22-B12D-F6895050AEFD</key>
 		<dict>
 			<key>xpos</key>
-			<real>970</real>
+			<real>965</real>
 			<key>ypos</key>
-			<real>1070</real>
+			<real>1065</real>
 		</dict>
 		<key>42B77FF6-6265-4118-B866-1029D095FA97</key>
 		<dict>
 			<key>xpos</key>
-			<real>1175</real>
+			<real>1615</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>740</real>
 		</dict>
 		<key>4A63CD6B-F071-4EF0-87E3-8A7DEC24E076</key>
 		<dict>
@@ -1724,9 +1825,18 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>1720</real>
+			<real>2160</real>
 			<key>ypos</key>
-			<real>1280</real>
+			<real>1345</real>
+		</dict>
+		<key>51016663-D536-4D22-85FA-EE53F6F3869D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>1710</real>
+			<key>ypos</key>
+			<real>570</real>
 		</dict>
 		<key>57C4BFD5-250D-4F39-8941-CA932120C23E</key>
 		<dict>
@@ -1740,16 +1850,16 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 		<key>601CFF4B-2B59-477F-8EDD-074F00AB2309</key>
 		<dict>
 			<key>xpos</key>
-			<real>970</real>
+			<real>965</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>940</real>
 		</dict>
 		<key>637B252C-27FF-4443-ADF9-3EBAA7BDD53D</key>
 		<dict>
 			<key>xpos</key>
-			<real>1390</real>
+			<real>1830</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>770</real>
 		</dict>
 		<key>685FFD37-914F-4216-B826-F01A7488F8E6</key>
 		<dict>
@@ -1758,9 +1868,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>note</key>
 			<string>open on explainxkcd.com</string>
 			<key>xpos</key>
-			<real>1360</real>
+			<real>1800</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>895</real>
 		</dict>
 		<key>6AB88246-6CF2-4960-895B-C7F1D973BEC2</key>
 		<dict>
@@ -1776,9 +1886,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>note</key>
 			<string>open on xkcd.com 🌐</string>
 			<key>xpos</key>
-			<real>1360</real>
+			<real>1800</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>1010</real>
 		</dict>
 		<key>7611EF13-1EB0-4443-8DBB-6C5E41061BFB</key>
 		<dict>
@@ -1801,9 +1911,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 		<key>7E5A3347-773C-4402-95C4-37BB636D73AB</key>
 		<dict>
 			<key>xpos</key>
-			<real>995</real>
+			<real>1420</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>745</real>
 		</dict>
 		<key>84435B23-5E9E-4C50-8A2C-9C3BA36658AD</key>
 		<dict>
@@ -1812,7 +1922,7 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>note</key>
 			<string>open on xkcd.com</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>695</real>
 		</dict>
@@ -1822,6 +1932,22 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<real>70</real>
 			<key>ypos</key>
 			<real>300</real>
+		</dict>
+		<key>8E8827E3-EEB1-45EC-B1A5-1E40784436CD</key>
+		<dict>
+			<key>xpos</key>
+			<real>690</real>
+			<key>ypos</key>
+			<real>730</real>
+		</dict>
+		<key>8FE7A1F7-7AA9-4A49-ABB2-7775E3E0E202</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>2345</real>
+			<key>ypos</key>
+			<real>1095</real>
 		</dict>
 		<key>940E827E-E6B2-41A3-8325-B423817E6AAF</key>
 		<dict>
@@ -1880,9 +2006,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>note</key>
 			<string>Toggle favorite ❤️</string>
 			<key>xpos</key>
-			<real>1360</real>
+			<real>1800</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1155</real>
 		</dict>
 		<key>B3047FBC-E222-4777-AE14-C75F83EC2994</key>
 		<dict>
@@ -1894,16 +2020,16 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 		<key>B3F64B88-041A-401B-8D7B-93F0E521E6C9</key>
 		<dict>
 			<key>xpos</key>
-			<real>1450</real>
+			<real>1890</real>
 			<key>ypos</key>
-			<real>1250</real>
+			<real>1315</real>
 		</dict>
 		<key>B42692BF-C43A-4EA6-B9DD-471079F3FD8E</key>
 		<dict>
 			<key>xpos</key>
-			<real>1685</real>
+			<real>1560</real>
 			<key>ypos</key>
-			<real>95</real>
+			<real>320</real>
 		</dict>
 		<key>B4A53503-5D7A-4DFA-8070-CF354DEAE75F</key>
 		<dict>
@@ -1914,21 +2040,21 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>ypos</key>
 			<real>195</real>
 		</dict>
-		<key>E47042E7-6C75-416B-A80F-F901E2BCB291</key>
+		<key>BA242782-AFE6-4A7E-8A4F-C216E955ECB4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1820</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>695</real>
 		</dict>
 		<key>E4A4B14A-9675-45CA-9578-76C642019601</key>
 		<dict>
 			<key>xpos</key>
-			<real>1515</real>
+			<real>1955</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1155</real>
 		</dict>
 		<key>E533E47C-8036-4A1B-9F9A-6A8BA70640F7</key>
 		<dict>
@@ -1951,9 +2077,9 @@ https://github.com/giovannicoppola/alfred-xkcd/issues</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>970</real>
+			<real>965</real>
 			<key>ypos</key>
-			<real>1205</real>
+			<real>1200</real>
 		</dict>
 		<key>F2C3859C-292A-4A8A-B6EE-90CEF34C0950</key>
 		<dict>
