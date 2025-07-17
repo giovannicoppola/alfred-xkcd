@@ -16,7 +16,7 @@
 - <kbd>⌘</kbd><kbd>↩️</kbd>: open on `xkcd.com`
 - <kbd>⌥</kbd><kbd>↩️</kbd>: open on `explainxkcd.com` (which has also larger images)
 
-# Updating
+## Updating
 
 - `alfred-xkcd` will download the titles of new comics based on the number of days specified in the `Workflow Configuration` (Refresh Rate variable)
 - refresh can be forced with `xxk::refresh`
