@@ -1,11 +1,11 @@
-![](images/screenshot.png)
-
 ## Usage
 
 - Search (default keyword: `xxkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics.
 - Favorite (default keyword: `xxk::favs`) or hotkey: grid with your favorite xkcd comics.
 - Recent (default keyword: `xxk::recent`) or hotkey: grid with recently viewed xkcd comics.
 - Random (default keyword: `xxk::random`) or hotkey: one random unread xkcd comic. Press <kbd>enter</kbd> for more!
+
+![](images/screenshot.png)
 
 ## On a selected comic:
 
