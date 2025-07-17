@@ -28,7 +28,6 @@ src="https://img.shields.io/github/downloads/giovannicoppola/alfred-xkcd/total?c
 - refresh can be forced with `xxk::refresh`
 
 
- 
 
 # Feedback
 ... is welcome!

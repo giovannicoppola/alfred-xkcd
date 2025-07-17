@@ -295,10 +295,6 @@ func openDB() (*sql.DB, error) {
 		year TEXT,
 		month TEXT,
 		day TEXT,
-		safe_title TEXT,
-		transcript TEXT,
-		link TEXT,
-		news TEXT,
 		is_favorite BOOLEAN DEFAULT 0,
 		is_read BOOLEAN DEFAULT 0
 	);`
@@ -319,30 +315,33 @@ func toggleFavorite(num int) (string, error) {
 	}
 	defer db.Close()
 
-	var isFav sql.NullBool
+	var isFavStr sql.NullString
 	var img string
-	err = db.QueryRow("SELECT is_favorite, img FROM xkcd WHERE num = ?", num).Scan(&isFav, &img)
+	err = db.QueryRow("SELECT is_favorite, img FROM xkcd WHERE num = ?", num).Scan(&isFavStr, &img)
 	if err != nil {
 		return "", err
 	}
 
-	// Handle NULL values - treat NULL as false
-	isFavorite := isFav.Valid && isFav.Bool
+	// Convert string field to boolean
+	isFavorite := isFavStr.Valid && (isFavStr.String == "1" || isFavStr.String == "true")
 
 	var exitMessage string
+	var newValue string
 	if isFavorite {
 		// Remove from favorites
 		favPath := filepath.Join(CACHE_FOLDER_FAVS, fmt.Sprintf("%d.png", num))
 		os.Remove(favPath)
 		exitMessage = "Removed from favorites 💔"
+		newValue = "false"
 	} else {
 		// Add to favorites and mark as read
 		fetchComicsPath(num, img, "favs")
 		markAsRead(num) // Mark as read when adding to favorites
 		exitMessage = "Added to favorites ❤️"
+		newValue = "true"
 	}
 
-	_, err = db.Exec("UPDATE xkcd SET is_favorite = ? WHERE num = ?", !isFavorite, num)
+	_, err = db.Exec("UPDATE xkcd SET is_favorite = ? WHERE num = ?", newValue, num)
 	if err != nil {
 		return "", err
 	}
@@ -357,7 +356,7 @@ func markAsRead(num int) error {
 	}
 	defer db.Close()
 
-	_, err = db.Exec("UPDATE xkcd SET is_read = ? WHERE num = ?", true, num)
+	_, err = db.Exec("UPDATE xkcd SET is_read = ? WHERE num = ?", "true", num)
 	return err
 }
 
@@ -368,16 +367,23 @@ func toggleRead(num int) error {
 	}
 	defer db.Close()
 
-	var isReadNull sql.NullBool
-	err = db.QueryRow("SELECT is_read FROM xkcd WHERE num = ?", num).Scan(&isReadNull)
+	var isReadStr sql.NullString
+	err = db.QueryRow("SELECT is_read FROM xkcd WHERE num = ?", num).Scan(&isReadStr)
 	if err != nil {
 		return err
 	}
 
-	// Handle NULL values - treat NULL as false (unread)
-	isRead := isReadNull.Valid && isReadNull.Bool
+	// Convert string field to boolean
+	isRead := isReadStr.Valid && (isReadStr.String == "1" || isReadStr.String == "true")
 
-	_, err = db.Exec("UPDATE xkcd SET is_read = ? WHERE num = ?", !isRead, num)
+	var newValue string
+	if isRead {
+		newValue = "false"
+	} else {
+		newValue = "true"
+	}
+
+	_, err = db.Exec("UPDATE xkcd SET is_read = ? WHERE num = ?", newValue, num)
 	return err
 }
 
@@ -428,9 +434,9 @@ func updateDatabase(newComics []Comic) error {
 
 	for _, comic := range newComics {
 		_, err := db.Exec(
-			"INSERT INTO xkcd (num, title, alt, img, year, month, day, safe_title, transcript, link, news, is_favorite, is_read) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+			"INSERT INTO xkcd (num, title, alt, img, year, month, day, is_favorite, is_read) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
 			comic.Num, comic.Title, comic.Alt, comic.Img, comic.Year, comic.Month, comic.Day,
-			comic.Title, "", "", "", 0, 0,
+			0, 0,
 		)
 		if err != nil {
 			logMessage(fmt.Sprintf("Error inserting comic %d: %v", comic.Num, err))
@@ -463,17 +469,37 @@ func queryComics(input string) error {
 		var params []interface{}
 
 		for _, term := range searchTerms {
-			if _, err := strconv.Atoi(term); err == nil {
-				conditions = append(conditions, "(alt LIKE ? OR title LIKE ? OR num = ?)")
-				params = append(params, "%"+term+"%", "%"+term+"%", term)
+			// Check if the term contains any uppercase letter
+			hasUpper := false
+			for _, r := range term {
+				if r >= 'A' && r <= 'Z' {
+					hasUpper = true
+					break
+				}
+			}
+
+			if num, err := strconv.Atoi(term); err == nil {
+				if hasUpper {
+					conditions = append(conditions, "(alt GLOB ? OR title GLOB ? OR num = ?)")
+					params = append(params, "*"+term+"*", "*"+term+"*", num)
+				} else {
+					conditions = append(conditions, "(LOWER(alt) LIKE LOWER(?) OR LOWER(title) LIKE LOWER(?) OR num = ?)")
+					params = append(params, "%"+term+"%", "%"+term+"%", num)
+				}
 			} else {
-				conditions = append(conditions, "(alt LIKE ? OR title LIKE ?)")
-				params = append(params, "%"+term+"%", "%"+term+"%")
+				if hasUpper {
+					conditions = append(conditions, "(alt GLOB ? OR title GLOB ?)")
+					params = append(params, "*"+term+"*", "*"+term+"*")
+				} else {
+					conditions = append(conditions, "(LOWER(alt) LIKE LOWER(?) OR LOWER(title) LIKE LOWER(?))")
+					params = append(params, "%"+term+"%", "%"+term+"%")
+				}
 			}
 		}
 
 		query := "SELECT num, title, alt, img, year, month, day, is_favorite, is_read FROM xkcd WHERE " +
 			strings.Join(conditions, " AND ") + " ORDER BY num DESC"
+
 		rows, err = db.Query(query, params...)
 	}
 
@@ -485,14 +511,19 @@ func queryComics(input string) error {
 	var comics []Comic
 	for rows.Next() {
 		var comic Comic
-		var isFav, isRead sql.NullBool
+		var isFavStr, isReadStr sql.NullString
+		// Use SELECT * so we need to scan all columns in the correct order
+		// Based on the schema: num, title, alt, img, year, month, day, is_favorite, is_read
 		err := rows.Scan(&comic.Num, &comic.Title, &comic.Alt, &comic.Img,
-			&comic.Year, &comic.Month, &comic.Day, &isFav, &isRead)
+			&comic.Year, &comic.Month, &comic.Day, &isFavStr, &isReadStr)
 		if err != nil {
 			continue
 		}
-		comic.IsFavorite = isFav.Bool
-		comic.IsRead = isRead.Bool
+
+		// Convert string fields to boolean
+		comic.IsFavorite = isFavStr.Valid && (isFavStr.String == "1" || isFavStr.String == "true")
+		comic.IsRead = isReadStr.Valid && (isReadStr.String == "1" || isReadStr.String == "true")
+
 		comics = append(comics, comic)
 	}
 
@@ -600,7 +631,7 @@ func favoriteGrid() error {
 	}
 	defer db.Close()
 
-	rows, err := db.Query("SELECT num, title, alt, img, year, month, day FROM xkcd WHERE is_favorite = 1")
+	rows, err := db.Query("SELECT num, title, alt, img, year, month, day FROM xkcd WHERE is_favorite = 'true'")
 	if err != nil {
 		return err
 	}
