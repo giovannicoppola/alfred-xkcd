@@ -11,7 +11,7 @@ src="https://img.shields.io/github/downloads/giovannicoppola/alfred-xkcd/total?c
 
 # Usage
 
-- Search (default keyword: `xkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics.
+- Search (default keyword: `xkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics. The search is case-sensitive if your query includes uppercase letters.
 - Favorite (default keyword: `xk::favs`) or hotkey: favorite xkcd comics in grid view.
 - Random (default keyword: `xk::random`) or hotkey: one random unread xkcd comic. Press enter for more!
 - Recent (default keyword: `xk::recent`) or hotkey: recently viewed xkcd comics in grid view.
