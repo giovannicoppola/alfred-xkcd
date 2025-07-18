@@ -11,10 +11,10 @@ src="https://img.shields.io/github/downloads/giovannicoppola/alfred-xkcd/total?c
 
 # Usage
 
-- Search (default keyword: `xxkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics.
-- Favorite (default keyword: `xxk::favs`) or hotkey: favorite xkcd comics in grid view.
-- Random (default keyword: `xxk::random`) or hotkey: one random unread xkcd comic. Press enter for more!
-- Recent (default keyword: `xxk::recent`) or hotkey: recently viewed xkcd comics in grid view.
+- Search (default keyword: `xkcd`) or hotkey: list and search xkcd comics. `❤️` will denote favorite, `•` unread comics.
+- Favorite (default keyword: `xk::favs`) or hotkey: favorite xkcd comics in grid view.
+- Random (default keyword: `xk::random`) or hotkey: one random unread xkcd comic. Press enter for more!
+- Recent (default keyword: `xk::recent`) or hotkey: recently viewed xkcd comics in grid view.
 
 ## On a selected comic:
 
@@ -28,7 +28,7 @@ src="https://img.shields.io/github/downloads/giovannicoppola/alfred-xkcd/total?c
 # Updating
 
 - `alfred-xkcd` will download the titles of new comics based on the number of days specified in the `Workflow Configuration` (Refresh Rate variable)
-- refresh can be forced with `xxk::refresh`
+- refresh can be forced with `xk::refresh`
 
 # Acknowledgements
 
