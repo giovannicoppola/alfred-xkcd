@@ -208,30 +208,48 @@ func extractZip(src, dest string) error {
 	return nil
 }
 
+// fallbackComicsMax is where checkUpdate starts when comicsMax.txt is missing
+// or unreadable: one past the newest comic already in the database, so a
+// bundled or existing database is not fetched again (updateDatabase does not
+// dedupe). 3116 is only a last resort if the database can't be read.
+func fallbackComicsMax() int {
+	db, err := openDB()
+	if err != nil {
+		return 3116
+	}
+	defer db.Close()
+
+	var maxNum sql.NullInt64
+	if err := db.QueryRow("SELECT MAX(num) FROM xkcd").Scan(&maxNum); err != nil || !maxNum.Valid {
+		return 3116
+	}
+	return int(maxNum.Int64) + 1
+}
+
 func checkRefreshFlag() {
 	if _, err := os.Stat(COMICSMAX_FILE); os.IsNotExist(err) {
-		COMICSMAX = 3116
+		COMICSMAX = fallbackComicsMax()
 		REFRESH_FLAG = true
 		return
 	}
 
 	data, err := os.ReadFile(COMICSMAX_FILE)
 	if err != nil {
-		COMICSMAX = 3116
+		COMICSMAX = fallbackComicsMax()
 		REFRESH_FLAG = true
 		return
 	}
 
 	lines := strings.Split(string(data), "\n")
 	if len(lines) < 2 {
-		COMICSMAX = 3116
+		COMICSMAX = fallbackComicsMax()
 		REFRESH_FLAG = true
 		return
 	}
 
 	COMICSMAX, err = strconv.Atoi(strings.TrimSpace(lines[0]))
 	if err != nil {
-		COMICSMAX = 3116
+		COMICSMAX = fallbackComicsMax()
 		REFRESH_FLAG = true
 		return
 	}
@@ -256,27 +274,36 @@ func fetchComicsPath(num int, imgURL, mode string) string {
 
 	if _, err := os.Stat(comicsPath); os.IsNotExist(err) {
 		logMessage(fmt.Sprintf("Retrieving image: %s", comicsPath))
-		downloadImage(imgURL, comicsPath)
+		if err := downloadImage(imgURL, comicsPath); err != nil {
+			logMessage(fmt.Sprintf("Failed to download image: %v", err))
+		}
 	}
 
 	return comicsPath
 }
 
-func downloadImage(url, filepath string) error {
+func downloadImage(url, dest string) error {
 	resp, err := http.Get(url)
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("download %s: HTTP %d", url, resp.StatusCode)
+	}
 
-	out, err := os.Create(filepath)
+	out, err := os.Create(dest)
 	if err != nil {
 		return err
 	}
 	defer out.Close()
 
-	_, err = io.Copy(out, resp.Body)
-	return err
+	if _, err = io.Copy(out, resp.Body); err != nil {
+		out.Close()
+		os.Remove(dest)
+		return err
+	}
+	return nil
 }
 
 func openDB() (*sql.DB, error) {
@@ -390,11 +417,13 @@ func toggleRead(num int) error {
 func checkUpdate(startNum int) error {
 	var newComics []Comic
 	currentNum := startNum
+	transportErr := false
 
 	for {
 		url := fmt.Sprintf("https://xkcd.com/%d/info.0.json", currentNum)
 		resp, err := http.Get(url)
 		if err != nil {
+			transportErr = true
 			break
 		}
 
@@ -406,6 +435,7 @@ func checkUpdate(startNum int) error {
 		var comic Comic
 		if err := json.NewDecoder(resp.Body).Decode(&comic); err != nil {
 			resp.Body.Close()
+			transportErr = true
 			break
 		}
 		resp.Body.Close()
@@ -419,7 +449,12 @@ func checkUpdate(startNum int) error {
 		updateDatabase(newComics)
 	}
 
-	// Update COMICSMAX file
+	if transportErr {
+		logMessage("checkUpdate: network error, leaving comicsMax.txt unchanged")
+		return nil
+	}
+
+	// Update COMICSMAX file only after a successful probe (404 = no more comics)
 	currentDate := time.Now().Format("2006-01-02")
 	content := fmt.Sprintf("%d\n%s\n", currentNum, currentDate)
 	return os.WriteFile(COMICSMAX_FILE, []byte(content), 0644)
@@ -1059,7 +1094,7 @@ func randomTextView() error {
 	defer db.Close()
 
 	// Get all unread comics
-	rows, err := db.Query("SELECT num FROM xkcd WHERE is_read != 1 OR is_read IS NULL")
+	rows, err := db.Query("SELECT num FROM xkcd WHERE is_read IS NULL OR is_read IN ('', '0', 'false')")
 	if err != nil {
 		return err
 	}
